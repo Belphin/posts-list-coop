@@ -1,6 +1,6 @@
 const App = () => {
   return(
-    <main></main>
+    <main className="wrapper"></main>
   )
 }
 

@@ -5,17 +5,21 @@ const Header = () => {
   const dispatch = useDispatch()
 
   // logged
-  const logged = useSelector(state => state.logged.logged)
-  const bg = useSelector(state => state.logged.bg)
-  const logInOut = () => dispatch({ type: logged? "LOG_OUT" : "LOG_IN" })
+  const logged = useSelector(state => state.logged)
+  const logInOut = () => dispatch({ type: logged.logged? "LOG_OUT" : "LOG_IN" })
 
   return(
-    <header>
+    <header className="wrapper">
       <h2>LOGO</h2>
-      <div>
-        {logged && <span>Hi, User</span>}
-        <button onClick={logInOut} style={{background: bg}}>{ logged? "Log Out" : "Log In" }</button>
-      </div>
+      <nav>
+        <button
+          onClick={logInOut}
+          style={{
+            background: logged.bg,
+            color: logged.text
+          }}
+        >{ logged.logged? "Log Out" : "Log In" }</button>
+      </nav>
     </header>
   )
 }

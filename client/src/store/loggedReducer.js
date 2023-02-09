@@ -1,4 +1,5 @@
 const defaultState = {
+  text: "#fff",
   bg: "#02C755",
   logged: false
 }
