@@ -8,6 +8,7 @@ const Home = () => {
   const getPosts = async () => {
     await fetch("https://raw.githubusercontent.com/Belphin/posts-list-coop/main/client/src/api/posts.json", {cache: 'no-store'})
       .then(res => res.json())
+      // .then(data => console.log(data[0]))
       .then(data => setPosts(data))
   }
   
@@ -30,7 +31,7 @@ const Home = () => {
             <a className="post" href={"/post/" + post._id} key={i}>
               <h3>{ post.title }</h3>
               <ul className="hashtags">
-                { post.tags.map((hashtag, i) => (<li key={i}>#{ hashtag }</li>)) }
+                {/* { post.tags.map((tag, i) => (<li key={i}>#{ tag }</li>)) } */}
               </ul>
               <div className="author">{ authors.find(obj => obj._id == post.author_id).name }</div>
             </a>
