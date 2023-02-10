@@ -2,4 +2,14 @@ header{
   display: flex;
   justify-content: space-between;
   padding: 1rem 0;
+  nav{
+    display: flex;
+    gap: .75rem;
+    .add{
+      color: #000;
+      background: none;
+      outline: .125rem solid #000;
+      outline-offset: -0.125rem;
+    }
+  }
 }

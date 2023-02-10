@@ -20,6 +20,7 @@ a {
 button {
   cursor: pointer;
   font-weight: 700;
+  color: #fff;
   background: #000;
   border: none;
   border-radius: 0.5rem;
@@ -44,13 +45,23 @@ header {
   justify-content: space-between;
   padding: 1rem 0;
 }
+header nav {
+  display: flex;
+  gap: 0.75rem;
+}
+header nav .add {
+  color: #000;
+  background: none;
+  outline: 0.125rem solid #000;
+  outline-offset: -0.125rem;
+}
 
-main .posts {
+main.home .posts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
   gap: 1rem;
 }
-main .posts .post {
+main.home .posts .post {
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -59,13 +70,13 @@ main .posts .post {
   border-radius: 1rem;
   padding: 1.5rem;
 }
-main .posts .post .hashtags {
+main.home .posts .post .hashtags {
   display: flex;
   gap: 0.25rem;
   font-size: 0.875rem;
   color: #555;
 }
-main .posts .post .author {
+main.home .posts .post .author {
   font-size: 0.875rem;
   color: #222;
 }/*# sourceMappingURL=index.css.map */

@@ -1,40 +1,36 @@
 // react
 import { useLayoutEffect, useState } from "react"
+// next
+import Link from "next/link"
 
 const Home = () => {
   const [posts, setPosts] = useState()
-  const [authors, setAuthors] = useState()
 
   const getPosts = async () => {
-    await fetch("https://raw.githubusercontent.com/Belphin/posts-list-coop/main/client/src/api/posts.json", {cache: 'no-store'})
+    await fetch("http://localhost:8080/api/post", {cache: 'no-store'})
       .then(res => res.json())
-      // .then(data => console.log(data[0]))
-      .then(data => setPosts(data))
-  }
-  
-  const getAuthors = async () => {
-    await fetch("https://raw.githubusercontent.com/Belphin/posts-list-coop/main/client/src/api/authors.json", {cache: 'no-store'})
-      .then(res => res.json())
-      .then(data => setAuthors(data))
+      .then(data => console.log(data))
+      // .then(data => setPosts(data))
   }
 
   useLayoutEffect(()=>{
     getPosts()
-    getAuthors()
   }, [])
 
   return(
     <main className="home wrapper">
       <div className="posts">
+        { !posts && <div>Loading...</div> }
+        { posts && posts.message }
         {
-          posts && authors && posts.map((post, i) => (
-            <a className="post" href={"/post/" + post._id} key={i}>
+          posts && posts.posts.map((post, i) => (
+            <Link className="post" href={"/post/" + post._id} key={i}>
               <h3>{ post.title }</h3>
               <ul className="hashtags">
-                {/* { post.tags.map((tag, i) => (<li key={i}>#{ tag }</li>)) } */}
+                { post.tags && post.tags.map((tag, i) => (<li key={i}>#{ tag }</li>)) }
               </ul>
-              <div className="author">{ authors.find(obj => obj._id == post.author_id).name }</div>
-            </a>
+              <div className="author">{ post.author }</div>
+            </Link>
           ))
         }
       </div>

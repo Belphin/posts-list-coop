@@ -12,6 +12,7 @@ const Header = () => {
     <header className="wrapper">
       <h2>LOGO</h2>
       <nav>
+        { logged.logged && <button className="add">Add post</button> }
         <button
           onClick={logInOut}
           style={{
