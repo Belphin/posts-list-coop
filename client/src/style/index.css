@@ -43,4 +43,29 @@ header {
   display: flex;
   justify-content: space-between;
   padding: 1rem 0;
+}
+
+main .posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 1rem;
+}
+main .posts .post {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  gap: 0.2rem;
+  border: 0.0625rem solid #e0e0e0;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+main .posts .post .hashtags {
+  display: flex;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: #555;
+}
+main .posts .post .author {
+  font-size: 0.875rem;
+  color: #222;
 }/*# sourceMappingURL=index.css.map */
