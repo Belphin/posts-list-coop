@@ -3,28 +3,40 @@ import { useLayoutEffect, useState } from "react"
 
 const Home = () => {
   const [posts, setPosts] = useState()
+  const [authors, setAuthors] = useState()
 
   const getPosts = async () => {
-    await fetch(require("./api/posts.json"))
+    await fetch("https://raw.githubusercontent.com/Belphin/posts-list-coop/main/client/src/api/posts.json")
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => setPosts(data))
+  }
+  
+  const getAuthors = async () => {
+    await fetch("https://raw.githubusercontent.com/Belphin/posts-list-coop/main/client/src/api/authors.json")
+      .then(res => res.json())
+      .then(data => setAuthors(data))
   }
 
   useLayoutEffect(()=>{
     getPosts()
+    getAuthors()
   }, [])
 
   return(
     <main className="home wrapper">
       <div className="posts">
-        <a className="post" href={"/post/" + "postID_01"}>
-          <h3>Lorem, ipsum.</h3>
-          <ul className="hashtags">
-            <li>#lorem</li>
-            <li>#ipsum</li>
-          </ul>
-          <div className="author">Ekaterine Mitagvaria</div>
-        </a>
+        {
+          posts && authors && posts.map((post, i) => (
+            <a className="post" href={"/post/" + "postID_01"} key={i}>
+              <h3>{ post.title }</h3>
+              <ul className="hashtags">
+                <li>#lorem</li>
+                <li>#ipsum</li>
+              </ul>
+              <div className="author">{ authors[post.author_id].name }</div>
+            </a>
+          ))
+        }
       </div>
     </main>
   )
