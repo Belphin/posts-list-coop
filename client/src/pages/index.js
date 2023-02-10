@@ -9,8 +9,7 @@ const Home = () => {
   const getPosts = async () => {
     await fetch("http://localhost:8080/api/post", {cache: 'no-store'})
       .then(res => res.json())
-      .then(data => console.log(data))
-      // .then(data => setPosts(data))
+      .then(data => setPosts(data))
   }
 
   useLayoutEffect(()=>{
