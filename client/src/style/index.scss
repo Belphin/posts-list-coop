@@ -4,10 +4,11 @@
   margin: 0;
 }
 
+@import "./ui/colors";
 @import "./ui/typography";
 @import "./ui/button";
 @import "./layout/wrapper";
 @import "./components/header";
 @import "./pages/home";
 @import "./pages/post";
-@import "./pages/new";
+@import "./pages/new-edit";

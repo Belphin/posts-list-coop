@@ -1,6 +1,7 @@
 .btn{
   cursor: pointer;
   display: block;
+  text-align: center;
   font-size: .8335rem;
   font-weight: 700;
   color: #fff;
@@ -8,10 +9,17 @@
   border: none;
   border-radius: .5rem;
   padding: .5rem 1rem;
+  &.red{
+    background: $red;
+  }
   &.outline{
     color: #000;
     background: none;
     outline: .125rem solid #000;
     outline-offset: -0.125rem;
+    &.red{
+      color: $red;
+      outline-color: $red;
+    }
   }
 }

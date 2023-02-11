@@ -24,6 +24,7 @@ input, textarea {
 .btn {
   cursor: pointer;
   display: block;
+  text-align: center;
   font-size: 0.8335rem;
   font-weight: 700;
   color: #fff;
@@ -32,11 +33,18 @@ input, textarea {
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
 }
+.btn.red {
+  background: #F25E5E;
+}
 .btn.outline {
   color: #000;
   background: none;
   outline: 0.125rem solid #000;
   outline-offset: -0.125rem;
+}
+.btn.outline.red {
+  color: #F25E5E;
+  outline-color: #F25E5E;
 }
 
 :root {
@@ -101,6 +109,42 @@ main.post .post .btn {
   align-self: flex-end;
 }
 
+main.new .deleteConfirm {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.3);
+}
+main.new .deleteConfirm .cont {
+  overflow: hidden;
+  max-width: 25rem;
+  background: #fff;
+  border-radius: 0.5rem;
+}
+main.new .deleteConfirm .cont .text {
+  padding: 2rem;
+}
+main.new .deleteConfirm .cont .text h3 {
+  color: #2D2D36;
+  margin-bottom: 1rem;
+}
+main.new .deleteConfirm .cont .text p {
+  color: #61616A;
+}
+main.new .deleteConfirm .cont nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1.25rem 1.25rem;
+}
+main.new .deleteConfirm .cont nav .btn {
+  padding: 0.5rem 1.25rem;
+}
+main.new .deleteConfirm .cont nav .cancel {
+  background: none;
+  font-weight: 500;
+  color: #616161;
+}
 main.new form {
   display: flex;
   flex-flow: column;
@@ -123,7 +167,11 @@ main.new form div textarea {
   max-height: 30rem;
   resize: vertical;
 }
-main.new form button {
-  align-self: flex-end;
+main.new form nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+main.new form nav .btn {
   padding: 0.6rem 1.2rem;
 }/*# sourceMappingURL=index.css.map */

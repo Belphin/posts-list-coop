@@ -28,7 +28,9 @@ const New = () => {
           <h3>Body</h3>
           <textarea id="body" />
         </div>
-        <button className="btn">Save</button>
+        <nav>
+          <button className="btn">Save</button>
+        </nav>
       </form>
     </main>
   )
