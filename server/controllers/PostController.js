@@ -4,8 +4,11 @@ const Post = require("../models/Post");
 class PostController {
 	async create(req, res) {
 		try {
-			const post = await Post.create(req.body);
-			const commnetList = await CommentsList.create({ post: post._id });
+			const commnetList = await CommentsList.create({ comments: [] });
+			const post = await Post.create({
+				...req.body,
+				comments: commnetList._id,
+			});
 			res.json(post);
 		} catch (e) {
 			console.log(e);
@@ -56,6 +59,7 @@ class PostController {
 		try {
 			const { id } = req.params;
 			const post = await Post.findByIdAndDelete(id);
+			await CommentsList.findByIdAndDelete(post.comments);
 			return res.json(post);
 		} catch (e) {
 			console.log(e);
