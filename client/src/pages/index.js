@@ -26,7 +26,7 @@ const Home = () => {
           posts && posts.posts.map((post, i) => (
             <Link className="post" href={"/post/" + post._id} key={i}>
               <h3>{ post.title }</h3>
-              <ul className="hashtags">
+              <ul className="tags">
                 { post.tags && post.tags.map((tag, i) => (<li key={i}>#{ tag }</li>)) }
               </ul>
               <div className="author">{ post.author }</div>

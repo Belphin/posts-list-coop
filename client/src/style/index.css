@@ -4,7 +4,7 @@
   margin: 0;
 }
 
-body {
+body, input, textarea {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
@@ -17,8 +17,14 @@ a {
   color: #000;
 }
 
-button {
+input, textarea {
+  font-size: 1rem;
+}
+
+.btn {
   cursor: pointer;
+  display: block;
+  font-size: 0.8335rem;
   font-weight: 700;
   color: #fff;
   background: #000;
@@ -26,10 +32,16 @@ button {
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
 }
+.btn.outline {
+  color: #000;
+  background: none;
+  outline: 0.125rem solid #000;
+  outline-offset: -0.125rem;
+}
 
 :root {
   --wrapper-padding: 1rem;
-  --wrapper-max-width: calc(90rem + var(--wrapper-padding)*2);
+  --wrapper-max-width: calc(75rem + var(--wrapper-padding)*2);
 }
 
 .wrapper {
@@ -49,12 +61,6 @@ header nav {
   display: flex;
   gap: 0.75rem;
 }
-header nav .add {
-  color: #000;
-  background: none;
-  outline: 0.125rem solid #000;
-  outline-offset: -0.125rem;
-}
 
 main.home .posts {
   display: grid;
@@ -70,7 +76,7 @@ main.home .posts .post {
   border-radius: 1rem;
   padding: 1.5rem;
 }
-main.home .posts .post .hashtags {
+main.home .posts .post .tags {
   display: flex;
   gap: 0.25rem;
   font-size: 0.875rem;
@@ -79,4 +85,45 @@ main.home .posts .post .hashtags {
 main.home .posts .post .author {
   font-size: 0.875rem;
   color: #222;
+}
+
+main.post .post {
+  display: flex;
+  flex-flow: column;
+}
+main.post .post .tags {
+  display: flex;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: #555;
+}
+main.post .post .btn {
+  align-self: flex-end;
+}
+
+main.new form {
+  display: flex;
+  flex-flow: column;
+  gap: 0.5rem;
+}
+main.new form div h3 {
+  line-height: 1.9;
+  padding: 0 1rem;
+}
+main.new form div input, main.new form div textarea {
+  width: 100%;
+  background: #eee;
+  border: none;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+main.new form div textarea {
+  height: 10rem;
+  min-height: 8rem;
+  max-height: 30rem;
+  resize: vertical;
+}
+main.new form button {
+  align-self: flex-end;
+  padding: 0.6rem 1.2rem;
 }/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,30 @@
+main.new{
+  form{
+    display: flex;
+    flex-flow: column;
+    gap: .5rem;
+    div{
+      h3{
+        line-height: 1.9;
+        padding: 0 1rem;
+      }
+      input, textarea{
+        width: 100%;
+        background: #eee;
+        border: none;
+        border-radius: 1rem;
+        padding: 1rem;
+      }
+      textarea{
+        height: 10rem;
+        min-height: 8rem;
+        max-height: 30rem;
+        resize: vertical;
+      }
+    }
+    button{
+      align-self: flex-end;
+      padding: .6rem 1.2rem;
+    }
+  }
+}

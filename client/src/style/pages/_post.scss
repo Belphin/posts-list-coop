@@ -1,0 +1,15 @@
+main.post{
+  .post{
+    display: flex;
+    flex-flow: column;
+    .tags{
+      display: flex;
+      gap: .25rem;
+      font-size: .875rem;
+      color: #555;
+    }
+    .btn{
+      align-self: flex-end;
+    }
+  }
+}
