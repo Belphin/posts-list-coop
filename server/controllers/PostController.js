@@ -27,6 +27,7 @@ class PostController {
 
 	async getOne(req, res) {
 		try {
+			console.log(req.params);
 			const { id } = req.params;
 			const post = await Post.findById(id);
 			return res.json(post);
