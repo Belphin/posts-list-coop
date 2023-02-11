@@ -36,6 +36,9 @@ input, textarea {
 .btn.red {
   background: #F25E5E;
 }
+.btn.green {
+  background: #02C755;
+}
 .btn.outline {
   color: #000;
   background: none;
@@ -61,6 +64,7 @@ input, textarea {
 }
 
 header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   padding: 1rem 0;
@@ -69,10 +73,64 @@ header nav {
   display: flex;
   gap: 0.75rem;
 }
+header nav .btn {
+  flex-shrink: 0;
+}
+header nav .btn:focus {
+  background: rgba(0, 0, 0, 0.075);
+}
+header nav #menuBtn {
+  display: none;
+}
+header nav .menuBtn {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  background: url("https://avatars.githubusercontent.com/u/110995737?v=4");
+  background-size: cover;
+  background-position: center;
+  border: 0.125rem solid #000;
+  border-radius: 50%;
+}
+header nav .menu {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  right: var(--wrapper-padding);
+  top: 90%;
+  font-size: 0.8335rem;
+  background: #fff;
+  border: 0.125rem solid #000;
+  border-radius: 0.4rem;
+  padding: 0.3rem;
+}
+header nav .menu li {
+  cursor: pointer;
+  border-radius: 0.3rem;
+  padding: 0.5rem 1.5rem 0.5rem 0.75rem;
+}
+header nav .menu li:hover {
+  background: #eee;
+}
+header nav .menu .divider {
+  width: 100%;
+  height: 0.125rem;
+  background: #000;
+  margin: 0.25rem 0;
+}
+header nav #menuBtn:checked ~ .menu {
+  opacity: 1;
+  pointer-events: unset;
+}
 
 main.home .posts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  display: flex;
+  flex-flow: column;
   gap: 1rem;
 }
 main.home .posts .post {
@@ -80,7 +138,7 @@ main.home .posts .post {
   flex-flow: column;
   justify-content: center;
   gap: 0.2rem;
-  border: 0.0625rem solid #e0e0e0;
+  border: 0.125rem solid #000;
   border-radius: 1rem;
   padding: 1.5rem;
 }

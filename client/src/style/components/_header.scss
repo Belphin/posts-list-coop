@@ -1,9 +1,62 @@
 header{
+  position: relative;
   display: flex;
   justify-content: space-between;
   padding: 1rem 0;
   nav{
     display: flex;
     gap: .75rem;
+    .btn{
+      flex-shrink: 0;
+      &:focus{ background: rgb(#000, .075); }
+    }
+    #menuBtn{
+      display: none;
+    }
+    .menuBtn{
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+      width: 2rem;
+      height: 2rem;
+      background: url("https://avatars.githubusercontent.com/u/110995737?v=4");
+      background-size: cover;
+      background-position: center;
+      border: $border;
+      border-radius: 50%;
+    }
+    .menu{
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      right: var(--wrapper-padding);
+      top: 90%;
+      font-size: .8335rem;
+      background: #fff;
+      border: $border;
+      border-radius: .4rem;
+      padding: .3rem;
+      li{
+        cursor: pointer;
+        border-radius: .3rem;
+        padding: .5rem 1.5rem .5rem .75rem;
+        &:hover{
+          background: #eee;
+        }
+      }
+      .divider{
+        width: 100%;
+        height: .125rem;
+        background: #000;
+        margin: .25rem 0;
+      }
+    }
+    #menuBtn:checked ~ .menu{
+      opacity: 1;
+      pointer-events: unset;
+    }
   }
 }

@@ -9,9 +9,8 @@
   border: none;
   border-radius: .5rem;
   padding: .5rem 1rem;
-  &.red{
-    background: $red;
-  }
+  &.red{ background: $red; }
+  &.green{ background: $green; }
   &.outline{
     color: #000;
     background: none;
