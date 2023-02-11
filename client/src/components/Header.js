@@ -1,3 +1,5 @@
+// next
+import Link from "next/link"
 // redux
 import { useDispatch, useSelector } from "react-redux"
 
@@ -10,16 +12,24 @@ const Header = () => {
 
   return(
     <header className="wrapper">
-      <h2>LOGO</h2>
+      <Link className="logo" href="/"><h2>LOGO</h2></Link>
       <nav>
-        { logged.logged && <button className="add">Add post</button> }
-        <button
-          onClick={logInOut}
-          style={{
-            background: logged.bg,
-            color: logged.text
-          }}
-        >{ logged.logged? "Log Out" : "Log In" }</button>
+        { logged.logged?
+          <>
+            <Link className="btn outline" href="/post/new">New post</Link>
+            <input type="checkbox" id="menuBtn" />
+            <button className="menuBtn" htmlFor="menuBtn" onClick={()=>{const btn = document.querySelector("#menuBtn"); btn.checked = !btn.checked}} />
+            <ul className="menu">
+              <li>Profile</li>
+              <div className="divider" />
+              <li onClick={logInOut}>Sign Out</li>
+            </ul>
+          </>
+          :
+          <>
+            <button className="btn" onClick={logInOut}>Log In</button>
+          </>
+        }
       </nav>
     </header>
   )

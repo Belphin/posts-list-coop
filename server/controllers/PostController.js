@@ -1,9 +1,11 @@
+const CommentsList = require("../models/CommentsList");
 const Post = require("../models/Post");
 
 class PostController {
 	async create(req, res) {
 		try {
 			const post = await Post.create(req.body);
+			const commnetList = await CommentsList.create({ post: post._id });
 			res.json(post);
 		} catch (e) {
 			console.log(e);
