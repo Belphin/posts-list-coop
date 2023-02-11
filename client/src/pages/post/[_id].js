@@ -17,7 +17,7 @@ const Post = () => {
 
 	useEffect(() => {
 		getPost();
-	}, [router]);
+	}, [router.query._id]);
 
 	return (
 		<main className="post wrapper">
