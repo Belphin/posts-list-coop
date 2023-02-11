@@ -7,7 +7,9 @@ const Home = () => {
   const [posts, setPosts] = useState()
 
   const getPosts = async () => {
-    await fetch("http://localhost:8080/api/post", {cache: 'no-store'})
+    await fetch("http://localhost:8080/api/post", {
+      cache: 'no-store'
+    })
       .then(res => res.json())
       .then(data => setPosts(data))
   }
@@ -20,7 +22,6 @@ const Home = () => {
     <main className="home wrapper">
       <div className="posts">
         { !posts && <div>Loading...</div> }
-        { posts && posts.message }
         {
           posts && posts.posts.map((post, i) => (
             <Link className="post" href={"/post/" + post._id} key={i}>

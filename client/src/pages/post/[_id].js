@@ -1,5 +1,5 @@
 // reatc
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 // next
 import { useRouter } from "next/router";
 
@@ -15,14 +15,13 @@ const Post = () => {
 			.then((data) => setPost(data));
 	};
 
-	useEffect(() => {
-		getPost();
-	}, [router]);
+	useLayoutEffect(()=>{
+		getPost()
+	}, [router])
 
 	return (
 		<main className="post wrapper">
 			{!post && <div>Loading...</div>}
-			{post && post.message}
 			{post && (
 				<div className="post">
 					<h1>{post.title}</h1>
