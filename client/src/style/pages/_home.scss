@@ -3,6 +3,7 @@ main.home{
     display: flex;
     flex-flow: column;
     gap: 1rem;
+    padding-bottom: var(--wrapper-padding);
     .post{
       display: flex;
       flex-flow: column;
