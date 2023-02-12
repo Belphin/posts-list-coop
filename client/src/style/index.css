@@ -165,6 +165,7 @@ main.post .post .tags {
   gap: 0.25rem;
   font-size: 0.875rem;
   color: #555;
+  margin: 0.5rem 0;
 }
 main.post .post .btn {
   align-self: flex-end;
