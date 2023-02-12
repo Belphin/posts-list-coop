@@ -20,7 +20,7 @@ header{
       justify-content: center;
       align-items: center;
       width: 2rem;
-      height: 2rem;
+      aspect-ratio: 1/1;
       background: url("https://avatars.githubusercontent.com/u/110995737?v=4");
       background-size: cover;
       background-position: center;
@@ -41,7 +41,7 @@ header{
       li{
         cursor: pointer;
         font-weight: 500;
-        border-radius: .3rem;
+        border-radius: .2rem;
         padding: .5rem 1.5rem .5rem .75rem;
         &:hover{
           background: #eee;

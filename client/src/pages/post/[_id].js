@@ -31,10 +31,12 @@ const Post = () => {
 			{!post && <div>Loading...</div>}
 			{post && (
 				<div className="post">
-					<h1>{post.title}</h1>
-					<ul className="tags">
-						{post.tags && post.tags.map((tag, i) => <li key={i}>#{tag}</li>)}
-					</ul>
+					<h1 className="title">{post.title}</h1>
+					{ post.tags && post.tags.length?
+						<ul className="tags">
+							{ post.tags.map((tag, i) => <li key={i}>#{tag}</li>) }
+						</ul> : null
+					}
 					<div className="body">
 						{
 							post.body &&

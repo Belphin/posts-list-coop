@@ -37,6 +37,9 @@ input, textarea {
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
 }
+.btn.hidden {
+  display: none;
+}
 .btn.red {
   background: #F25E5E;
 }
@@ -91,7 +94,7 @@ header nav .menuBtn {
   justify-content: center;
   align-items: center;
   width: 2rem;
-  height: 2rem;
+  aspect-ratio: 1/1;
   background: url("https://avatars.githubusercontent.com/u/110995737?v=4");
   background-size: cover;
   background-position: center;
@@ -113,7 +116,7 @@ header nav .menu {
 header nav .menu li {
   cursor: pointer;
   font-weight: 500;
-  border-radius: 0.3rem;
+  border-radius: 0.2rem;
   padding: 0.5rem 1.5rem 0.5rem 0.75rem;
 }
 header nav .menu li:hover {
@@ -159,6 +162,7 @@ main.home .posts .post .author {
 main.post .post {
   display: flex;
   flex-flow: column;
+  gap: 0.6rem;
 }
 main.post .post .tags {
   display: flex;
@@ -166,55 +170,55 @@ main.post .post .tags {
   gap: 0.25rem;
   font-size: 0.875rem;
   color: #555;
-  margin: 0.5rem 0;
 }
 main.post .post .btn {
   align-self: flex-end;
+  margin-top: 1rem;
 }
 
-main.new .deleteConfirm {
+main.editor .deleteConfirm {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
   background: rgba(0, 0, 0, 0.3);
 }
-main.new .deleteConfirm .cont {
+main.editor .deleteConfirm .cont {
   overflow: hidden;
   max-width: 25rem;
   background: #fff;
   border: 0.125rem solid #000;
   border-radius: 0.5rem;
 }
-main.new .deleteConfirm .cont .text {
+main.editor .deleteConfirm .cont .text {
   padding: 2rem;
 }
-main.new .deleteConfirm .cont .text h3 {
+main.editor .deleteConfirm .cont .text h3 {
   color: #2D2D36;
   margin-bottom: 1rem;
 }
-main.new .deleteConfirm .cont .text p {
+main.editor .deleteConfirm .cont .text p {
   color: #61616A;
 }
-main.new .deleteConfirm .cont nav {
+main.editor .deleteConfirm .cont nav {
   display: flex;
   justify-content: flex-end;
   padding: 0 1.25rem 1.25rem;
 }
-main.new .deleteConfirm .cont nav .btn {
+main.editor .deleteConfirm .cont nav .btn {
   padding: 0.5rem 1.25rem;
 }
-main.new .deleteConfirm .cont nav .cancel {
+main.editor .deleteConfirm .cont nav .cancel {
   background: none;
   font-weight: 500;
   color: #616161;
 }
-main.new form {
+main.editor form {
   display: flex;
   flex-flow: column;
   gap: 0.5rem;
 }
-main.new form input, main.new form textarea {
+main.editor form input, main.editor form textarea {
   width: 100%;
   background: #efefef;
   border: none;
@@ -222,43 +226,43 @@ main.new form input, main.new form textarea {
   border-radius: 0.5rem;
   padding: 1rem;
 }
-main.new form textarea {
+main.editor form textarea {
   resize: none;
 }
-main.new form .body {
+main.editor form .body {
   height: 15rem;
   min-height: 8rem;
   max-height: 30rem;
 }
-main.new form .title {
+main.editor form .title {
   font-size: 2rem;
   font-weight: 700;
   max-height: 12rem;
 }
-main.new form .tags {
+main.editor form .tags {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr));
 }
-main.new form .tags .field {
+main.editor form .tags .field {
   display: flex;
   height: 2rem;
 }
-main.new form .tags .field .hashtag {
+main.editor form .tags .field .hashtag {
   height: 100%;
   aspect-ratio: 1/1;
   display: grid;
   place-items: center;
 }
-main.new form .tags .field input {
+main.editor form .tags .field input {
   width: 8rem;
   background: none;
   padding: 0;
 }
-main.new form nav {
+main.editor form nav {
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
 }
-main.new form nav .btn {
+main.editor form nav .btn {
   padding: 0.6rem 1.2rem;
 }/*# sourceMappingURL=index.css.map */

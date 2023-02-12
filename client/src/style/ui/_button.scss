@@ -10,6 +10,7 @@
   border: none;
   border-radius: .5rem;
   padding: .5rem 1rem;
+  &.hidden{ display: none; }
   &.red{ background: $red; }
   &.green{ background: $green; }
   &.outline{

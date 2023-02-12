@@ -1,5 +1,7 @@
 // react
 import { useState } from "react"
+// next
+import Link from "next/link"
 
 const New = () => {
   const tagsNum = 4
@@ -28,13 +30,14 @@ const New = () => {
       },
       body: JSON.stringify(data),
     })
+      // .then(() => document.querySelector('main.editor form nav .toPost').click())
       .then(() => document.querySelector('header .logo').click())
   }
 
   return (
-    <main className="new wrapper">
+    <main className="editor wrapper">
       <form onSubmit={submitPost}>
-        <input type="text" className="title" id="title" placeholder="Title..." />
+        <textarea type="text" className="title" id="title" placeholder="Title..." onChange={(e)=>{e.target.style.height = e.target.scrollHeight + "px"}} />
         <div className="tags">
           { [...Array(tagsNum)].map((x, i)=>(
             <div className="field" key={i}>
@@ -53,9 +56,10 @@ const New = () => {
             </div>
           )) }
         </div>
-        <textarea id="body" placeholder="Write here..." />
+        <textarea className="body" id="body" placeholder="Write here..." />
         <nav>
           <button className="btn">Publish</button>
+          {/* <Link className="btn hidden toPost" href={"/post/"+router.query._id}>To the post</Link> */}
         </nav>
       </form>
     </main>

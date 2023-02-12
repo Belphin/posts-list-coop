@@ -2,6 +2,7 @@
 import { useEffect, useLayoutEffect, useState } from "react"
 // next
 import { useRouter } from "next/router"
+import Link from "next/link"
 
 const Edit = () => {
   const router = useRouter()
@@ -41,7 +42,7 @@ const Edit = () => {
         author: "test"
       }),
     })
-      .then(() => document.querySelector('header .logo').click())
+      .then(() => document.querySelector('main.editor form nav .toPost').click())
   }
 
   const deletePost = async () => {
@@ -65,7 +66,7 @@ const Edit = () => {
   }, [post])
 
   return (
-    <main className="new wrapper">
+    <main className="editor wrapper">
       { deleteConfirm &&
         <div className="deleteConfirm">
           <div className="cont">
@@ -84,7 +85,7 @@ const Edit = () => {
         <textarea className="title" id="title" placeholder="Title..." value={ title && title } onChange={(e)=>{
           setTitle(e.target.value)
           e.target.style.height = e.target.scrollHeight + "px"
-        }}  />
+        }} />
         <div className="tags">
           { [...Array(tagsNum)].map((x, i)=>(
             <div className="field" key={i}>
@@ -107,6 +108,7 @@ const Edit = () => {
         <nav>
           <div className="delete btn outline red" onClick={()=>{setDeleteConfirm(true)}}>Delete</div>
           <button className="save btn">Save</button>
+          <Link className="btn hidden toPost" href={"/post/"+router.query._id}>To the post</Link>
         </nav>
       </form>
     </main>
