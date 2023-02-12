@@ -4,7 +4,7 @@ const CommentsList = require("../models/CommentsList");
 class CommentController {
 	async create(req, res) {
 		try {
-			const comment = await new Comment(req.body);
+			const comment = await Comment.create(req.body);
 			const { id } = req.params;
 			const commentsList = await CommentsList.findById(id);
 			await CommentsList.findByIdAndUpdate(
@@ -51,11 +51,18 @@ class CommentController {
 			const { id } = req.params;
 			const { limit, page } = req.query;
 			const commentsList = await CommentsList.findById(id);
-			const commments = {
+			const comments = {
 				maxCount: commentsList.comments.length,
 				comments: commentsList.comments.slice(limit * (page - 1), limit * page),
 			};
-			return res.json(commments);
+			const response = [];
+			for (const i in comments.comments) {
+				if (comments.comments[i]) {
+					const comment = await Comment.findById(comments.comments[i] + "");
+					response.push(comment);
+				}
+			}
+			return res.json(response);
 		} catch (e) {
 			console.log(e);
 			res.send({ message: "Server error" });
