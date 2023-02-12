@@ -81,7 +81,10 @@ const Edit = () => {
         </div>
       }
       <form onSubmit={submitPost}>
-        <input type="text" className="title" id="title" placeholder="Title..." value={ title && title } onChange={(e)=>{setTitle(e.target.value)}}  />
+        <textarea className="title" id="title" placeholder="Title..." value={ title && title } onChange={(e)=>{
+          setTitle(e.target.value)
+          e.target.style.height = e.target.scrollHeight + "px"
+        }}  />
         <div className="tags">
           { [...Array(tagsNum)].map((x, i)=>(
             <div className="field" key={i}>
@@ -100,7 +103,7 @@ const Edit = () => {
             </div>
           )) }
         </div>
-        <textarea id="body" placeholder="Write here..." value={ body && body } onChange={(e)=>{setBody(e.target.value)}}  />
+        <textarea className="body" id="body" placeholder="Write here..." value={ body && body } onChange={(e)=>{setBody(e.target.value)}}  />
         <nav>
           <div className="delete btn outline red" onClick={()=>{setDeleteConfirm(true)}}>Delete</div>
           <button className="save btn">Save</button>

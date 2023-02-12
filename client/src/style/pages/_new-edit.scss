@@ -49,13 +49,17 @@ main.new{
       padding: 1rem;
     }
     textarea{
-      height: 10rem;
+      resize: none;
+    }
+    .body{
+      height: 15rem;
       min-height: 8rem;
       max-height: 30rem;
-      resize: vertical;
     }
     .title{
-      font-size: 1.17rem;
+      font-size: 2rem;
+      font-weight: 700;
+      max-height: 12rem;
     }
     .tags{
       display: grid;

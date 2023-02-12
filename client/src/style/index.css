@@ -221,13 +221,17 @@ main.new form input, main.new form textarea {
   padding: 1rem;
 }
 main.new form textarea {
-  height: 10rem;
+  resize: none;
+}
+main.new form .body {
+  height: 15rem;
   min-height: 8rem;
   max-height: 30rem;
-  resize: vertical;
 }
 main.new form .title {
-  font-size: 1.17rem;
+  font-size: 2rem;
+  font-weight: 700;
+  max-height: 12rem;
 }
 main.new form .tags {
   display: grid;
