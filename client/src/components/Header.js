@@ -16,7 +16,7 @@ const Header = () => {
       <nav>
         { logged.logged?
           <>
-            <Link className="btn outline" href="/post/new">New post</Link>
+            <Link className="btn outline" href="/post/editor">New post</Link>
             <input type="checkbox" id="menuBtn" />
             <button className="menuBtn" htmlFor="menuBtn" onClick={()=>{const btn = document.querySelector("#menuBtn"); btn.checked = !btn.checked}} />
             <ul className="menu">

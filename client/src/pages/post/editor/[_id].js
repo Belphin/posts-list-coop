@@ -6,8 +6,11 @@ import { useRouter } from "next/router"
 const Edit = () => {
   const router = useRouter()
   const [post, setPost] = useState()
-  const [title, setTitle] = useState("")
-  const [body, setBody] = useState("")
+  const [title, setTitle] = useState()
+  const tagsNum = 4
+  const [tags, setTags] = useState()
+  const allowed = [null, '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+  const [body, setBody] = useState()
   const [deleteConfirm, setDeleteConfirm] = useState(false)
 
   const getPost = async () => {
@@ -18,6 +21,11 @@ const Edit = () => {
 
   const submitPost = async (e) => {
     e.preventDefault()
+    // choose only not empty tags
+    const finalTags = []
+    tags.forEach(tag => {
+      if(tag) finalTags.push(tag)
+    })
     await fetch("http://localhost:8080/api/post/", {
       method: "PUT",
       cache: "no-cache",
@@ -28,6 +36,7 @@ const Edit = () => {
       body: JSON.stringify({
         _id: router.query._id,
         title: title,
+        tags: finalTags,
         body: body,
         author: "test"
       }),
@@ -50,6 +59,7 @@ const Edit = () => {
   useEffect(()=>{
     if(post){
       setTitle(post.title)
+      setTags(post.tags)
       setBody(post.body)
     }
   }, [post])
@@ -71,16 +81,26 @@ const Edit = () => {
         </div>
       }
       <form onSubmit={submitPost}>
-        <input type="text" className="title" id="title" placeholder="Title..." value={ title } onChange={(e)=>{setTitle(e.target.value)}}  />
+        <input type="text" className="title" id="title" placeholder="Title..." value={ title && title } onChange={(e)=>{setTitle(e.target.value)}}  />
         <div className="tags">
-          { [...Array(4)].map((n, i)=>(
+          { [...Array(tagsNum)].map((x, i)=>(
             <div className="field" key={i}>
               <div className="hashtag">#</div>
-              <input type="text" className={"tag_"+i} placeholder="new tag..." />
+              <input type="text" className={"tag_"+i} placeholder="new tag..." value={ tags && tags[i] } 
+                onPaste={(e)=>{e.preventDefault()}}
+                onChange={(e)=>{
+                  if(!allowed.includes(e.nativeEvent.data)) e.target.value = e.target.value-1
+                  else{
+                    let tmp = [...tags]
+                    tmp[i] = e.target.value
+                    setTags(tmp)
+                  }
+                }
+              } />
             </div>
           )) }
         </div>
-        <textarea id="body" placeholder="Write here..." value={ body } onChange={(e)=>{setBody(e.target.value)}}  />
+        <textarea id="body" placeholder="Write here..." value={ body && body } onChange={(e)=>{setBody(e.target.value)}}  />
         <nav>
           <div className="delete btn outline red" onClick={()=>{setDeleteConfirm(true)}}>Delete</div>
           <button className="save btn">Save</button>
