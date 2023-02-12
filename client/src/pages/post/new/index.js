@@ -7,27 +7,24 @@ const New = () => {
     const tags = []
     for(let i=0; i<4; i++){
       const tag = e.target.querySelector("main.new form .tags .tag_"+i).value
-      if(tag.lenght){
-        tags.push(tag)
-        console.log(1)
-      }
+      if(tag) tags.push(tag)
     }
-    // const data = {
-    //   title: e.target.querySelector("#title").value,
-    //   tags: tags,
-    //   body: e.target.querySelector("#body").value,
-    //   author: "test"
-    // }
-    // await fetch("http://localhost:8080/api/post", {
-    //   method: "POST",
-    //   cache: "no-cache",
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(data),
-    // })
-    //   .then(() => document.querySelector('header .logo').click())
+    const data = {
+      title: e.target.querySelector("#title").value,
+      tags: tags,
+      body: e.target.querySelector("#body").value,
+      author: "test"
+    }
+    await fetch("http://localhost:8080/api/post", {
+      method: "POST",
+      cache: "no-cache",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data),
+    })
+      .then(() => document.querySelector('header .logo').click())
   }
 
   return (

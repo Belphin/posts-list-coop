@@ -71,14 +71,16 @@ const Edit = () => {
         </div>
       }
       <form onSubmit={submitPost}>
-        <div>
-          <h3>Title</h3>
-          <input type="text" value={ title } onChange={(e)=>{setTitle(e.target.value)}} />
+        <input type="text" className="title" id="title" placeholder="Title..." value={ title } onChange={(e)=>{setTitle(e.target.value)}}  />
+        <div className="tags">
+          { [...Array(4)].map((n, i)=>(
+            <div className="field" key={i}>
+              <div className="hashtag">#</div>
+              <input type="text" className={"tag_"+i} placeholder="new tag..." />
+            </div>
+          )) }
         </div>
-        <div>
-          <h3>Body</h3>
-          <textarea value={ body } onChange={(e)=>{setBody(e.target.value)}} />
-        </div>
+        <textarea id="body" placeholder="Write here..." value={ body } onChange={(e)=>{setBody(e.target.value)}}  />
         <nav>
           <div className="delete btn outline red" onClick={()=>{setDeleteConfirm(true)}}>Delete</div>
           <button className="save btn">Save</button>
