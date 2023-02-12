@@ -3,6 +3,9 @@
   padding: 0;
   margin: 0;
 }
+*:focus-visible {
+  outline: 0.125rem solid cornflowerblue !important;
+}
 
 body, input, textarea {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -23,8 +26,9 @@ input, textarea {
 
 .btn {
   cursor: pointer;
-  display: block;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 0.8335rem;
   font-weight: 700;
   color: #fff;
@@ -52,7 +56,7 @@ input, textarea {
 
 :root {
   --wrapper-padding: 1rem;
-  --wrapper-max-width: calc(75rem + var(--wrapper-padding)*2);
+  --wrapper-max-width: calc(60rem + var(--wrapper-padding)*2);
 }
 
 .wrapper {
@@ -75,9 +79,6 @@ header nav {
 }
 header nav .btn {
   flex-shrink: 0;
-}
-header nav .btn:focus {
-  background: rgba(0, 0, 0, 0.075);
 }
 header nav #menuBtn {
   display: none;
@@ -111,6 +112,7 @@ header nav .menu {
 }
 header nav .menu li {
   cursor: pointer;
+  font-weight: 500;
   border-radius: 0.3rem;
   padding: 0.5rem 1.5rem 0.5rem 0.75rem;
 }
@@ -178,6 +180,7 @@ main.new .deleteConfirm .cont {
   overflow: hidden;
   max-width: 25rem;
   background: #fff;
+  border: 0.125rem solid #000;
   border-radius: 0.5rem;
 }
 main.new .deleteConfirm .cont .text {
@@ -208,22 +211,41 @@ main.new form {
   flex-flow: column;
   gap: 0.5rem;
 }
-main.new form div h3 {
-  line-height: 1.9;
-  padding: 0 1rem;
-}
-main.new form div input, main.new form div textarea {
+main.new form input, main.new form textarea {
   width: 100%;
-  background: #eee;
+  background: #efefef;
   border: none;
-  border-radius: 1rem;
+  outline: none !important;
+  border-radius: 0.5rem;
   padding: 1rem;
 }
-main.new form div textarea {
+main.new form textarea {
   height: 10rem;
   min-height: 8rem;
   max-height: 30rem;
   resize: vertical;
+}
+main.new form .title {
+  font-size: 1.17rem;
+}
+main.new form .tags {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr));
+}
+main.new form .tags .field {
+  display: flex;
+  height: 2rem;
+}
+main.new form .tags .field .hashtag {
+  height: 100%;
+  aspect-ratio: 1/1;
+  display: grid;
+  place-items: center;
+}
+main.new form .tags .field input {
+  width: 8rem;
+  background: none;
+  padding: 0;
 }
 main.new form nav {
   display: flex;

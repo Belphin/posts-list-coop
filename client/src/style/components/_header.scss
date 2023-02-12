@@ -8,7 +8,6 @@ header{
     gap: .75rem;
     .btn{
       flex-shrink: 0;
-      &:focus{ background: rgb(#000, .075); }
     }
     #menuBtn{
       display: none;
@@ -41,6 +40,7 @@ header{
       padding: .3rem;
       li{
         cursor: pointer;
+        font-weight: 500;
         border-radius: .3rem;
         padding: .5rem 1.5rem .5rem .75rem;
         &:hover{

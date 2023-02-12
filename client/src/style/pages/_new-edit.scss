@@ -9,6 +9,7 @@ main.new{
       overflow: hidden;
       max-width: 25rem;
       background: #fff;
+      border: $border;
       border-radius: .5rem;
       .text{
         padding: 2rem;
@@ -39,23 +40,40 @@ main.new{
     display: flex;
     flex-flow: column;
     gap: .5rem;
-    div{
-      h3{
-        line-height: 1.9;
-        padding: 0 1rem;
-      }
-      input, textarea{
-        width: 100%;
-        background: #eee;
-        border: none;
-        border-radius: 1rem;
-        padding: 1rem;
-      }
-      textarea{
-        height: 10rem;
-        min-height: 8rem;
-        max-height: 30rem;
-        resize: vertical;
+    input, textarea{
+      width: 100%;
+      background: #efefef;
+      border: none;
+      outline: none !important;
+      border-radius: .5rem;
+      padding: 1rem;
+    }
+    textarea{
+      height: 10rem;
+      min-height: 8rem;
+      max-height: 30rem;
+      resize: vertical;
+    }
+    .title{
+      font-size: 1.17rem;
+    }
+    .tags{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr));
+      .field{
+        display: flex;
+        height: 2rem;
+        .hashtag{
+          height: 100%;
+          aspect-ratio: 1/1;
+          display: grid;
+          place-items: center;
+        }
+        input{
+          width: 8rem;
+          background: none;
+          padding: 0;
+        }
       }
     }
     nav{

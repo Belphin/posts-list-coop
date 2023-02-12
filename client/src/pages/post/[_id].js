@@ -36,11 +36,7 @@ const Post = () => {
 						{post.tags && post.tags.map((tag, i) => <li key={i}>#{tag}</li>)}
 					</ul>
 					<p>{post.body}</p>
-					{logged.logged && (
-						<Link className="btn outline" href={"/post/edit/" + post._id}>
-							Edit
-						</Link>
-					)}
+					{ logged.logged && <Link className="btn" href={"/post/edit/"+post._id}>Edit</Link> }
 				</div>
 			)}
 		</main>

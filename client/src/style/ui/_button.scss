@@ -1,7 +1,8 @@
 .btn{
   cursor: pointer;
-  display: block;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: .8335rem;
   font-weight: 700;
   color: #fff;

@@ -2,6 +2,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  &:focus-visible{ outline: .125rem solid cornflowerblue !important; }
 }
 
 @import "./ui/colors";

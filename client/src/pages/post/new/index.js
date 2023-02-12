@@ -1,35 +1,50 @@
+// react
+import { useState } from "react"
+
 const New = () => {
   const submitPost = async (e) => {
     e.preventDefault()
-    await fetch("http://localhost:8080/api/post", {
-      method: "POST",
-      cache: "no-cache",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        title: e.target.querySelector("#title").value,
-        body: e.target.querySelector("#body").value,
-        author: "test"
-      }),
-    })
-      .then(() => document.querySelector('header .logo').click())
+    const tags = []
+    for(let i=0; i<4; i++){
+      const tag = e.target.querySelector("main.new form .tags .tag_"+i).value
+      if(tag.lenght){
+        tags.push(tag)
+        console.log(1)
+      }
+    }
+    // const data = {
+    //   title: e.target.querySelector("#title").value,
+    //   tags: tags,
+    //   body: e.target.querySelector("#body").value,
+    //   author: "test"
+    // }
+    // await fetch("http://localhost:8080/api/post", {
+    //   method: "POST",
+    //   cache: "no-cache",
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(data),
+    // })
+    //   .then(() => document.querySelector('header .logo').click())
   }
 
   return (
     <main className="new wrapper">
       <form onSubmit={submitPost}>
-        <div>
-          <h3>Title</h3>
-          <input type="text" id="title" />
+        <input type="text" className="title" id="title" placeholder="Title..." />
+        <div className="tags">
+          { [...Array(4)].map((n, i)=>(
+            <div className="field" key={i}>
+              <div className="hashtag">#</div>
+              <input type="text" className={"tag_"+i} placeholder="new tag..." />
+            </div>
+          )) }
         </div>
-        <div>
-          <h3>Body</h3>
-          <textarea id="body" />
-        </div>
+        <textarea id="body" placeholder="Write here..." />
         <nav>
-          <button className="btn">Save</button>
+          <button className="btn">Publish</button>
         </nav>
       </form>
     </main>
