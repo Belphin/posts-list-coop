@@ -160,6 +160,7 @@ main.home .posts .post .author {
   color: #222;
 }
 main.home .posts .observerTrigger {
+  pointer-events: none;
   position: absolute;
   bottom: 0;
   left: 0;

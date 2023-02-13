@@ -25,6 +25,7 @@ main.home{
       }
     }
     .observerTrigger{
+      pointer-events: none;
       position: absolute;
       bottom: 0;
       left: 0;
