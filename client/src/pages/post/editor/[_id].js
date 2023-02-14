@@ -82,7 +82,7 @@ const Edit = () => {
         </div>
       }
       <form onSubmit={submitPost}>
-        <textarea className="title" id="title" placeholder="Title..." value={ title && title } onChange={(e)=>{
+        <textarea required className="title" id="title" placeholder="Title..." value={ title && title } onChange={(e)=>{
           setTitle(e.target.value)
           e.target.style.height = e.target.scrollHeight + "px"
         }} />
@@ -104,7 +104,7 @@ const Edit = () => {
             </div>
           )) }
         </div>
-        <textarea className="body" id="body" placeholder="Write here..." value={ body && body } onChange={(e)=>{setBody(e.target.value)}}  />
+        <textarea required className="body" id="body" placeholder="Write here..." value={ body && body } onChange={(e)=>{setBody(e.target.value)}}  />
         <nav>
           <div className="delete btn outline red" onClick={()=>{setDeleteConfirm(true)}}>Delete</div>
           <button className="save btn">Save</button>

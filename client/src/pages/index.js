@@ -22,7 +22,6 @@ const Home = () => {
     // set an observer
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        let observerIntervar
         if(entry.isIntersecting) setPage(page => page + .5)
         ////
         // let observerIntervar
