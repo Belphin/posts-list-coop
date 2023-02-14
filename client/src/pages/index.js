@@ -41,7 +41,7 @@ const Home = () => {
   useEffect(()=>{
     console.log("page: " + page);
     if(maxCount && (page * postsPerPage - postsPerPage) > maxCount) return
-    if(page > 0) getPosts(page)
+    else if(page > 0) getPosts(page)
   }, [page])
 
   // useEffect(()=>{
