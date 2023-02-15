@@ -1,52 +1,45 @@
 // react
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 // next
 import Link from "next/link"
 
 const Home = () => {
+  const [observerTriggerSeen, setObserverTriggerSeen] = useState(false)
   const postsPerPage = 8
-  const [page, setPage] = useState(0)
-  const [maxCount, setMaxCount] = useState()
+  const page = useRef(0)
+  const maxCount = useRef(0)
   const [posts, setPosts] = useState([])
+  const observer = useRef()
+  const observerTrigger = useRef()
 
   const getPosts = async (postNum) => {
     await fetch("http://localhost:8080/api/post?page="+postNum+"&limit="+postsPerPage, { cache: 'no-store' })
       .then(res => res.json())
       .then(data => {
-        if(!maxCount) setMaxCount(data.maxCount)
+        if(!maxCount.current) maxCount.current = data.maxCount
         setPosts([...posts, ...data.posts])
       })
   }
 
   useEffect(()=>{
     // set an observer
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) setPage(page => page + .5)
-        ////
-        // let observerIntervar
-        // if(entry.isIntersecting) observerIntervar = setInterval(()=>{setPage(page => page + .5)}, 1000)
-        // else{
-        //   console.log("NOT OBSERVING");
-        //   clearInterval(observerIntervar)
-        // }
-      })
+    observer.current = new IntersectionObserver(entries => {
+      const trigger = entries[0]
+      const nextPostsNum = (page.current+1) * postsPerPage - postsPerPage
+      if(trigger.isIntersecting && nextPostsNum <= maxCount.current) setObserverTriggerSeen(true)
+      else setObserverTriggerSeen(false)
     })
 
     // add the observer
-    const observerTrigger = document.querySelector("main.home .posts .observerTrigger")
-    observer.observe(observerTrigger)
+    observer.current.observe(observerTrigger.current)
   }, [])
 
   useEffect(()=>{
-    console.log("page: " + page);
-    if(maxCount && (page * postsPerPage - postsPerPage) > maxCount) return
-    else if(page > 0) getPosts(page)
-  }, [page])
-
-  // useEffect(()=>{
-  //   console.log(posts);
-  // }, [posts])
+    if(observerTriggerSeen){
+      page.current = page.current + 1
+      getPosts(page.current)
+    }
+  }, [observerTriggerSeen])
 
   return(
     <main className="home wrapper">
@@ -64,7 +57,7 @@ const Home = () => {
               </Link>
             ))
         }
-        <div className="observerTrigger" />
+        <div className="observerTrigger" ref={observerTrigger} />
       </div>
     </main>
   )
