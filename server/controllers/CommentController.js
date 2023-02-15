@@ -11,7 +11,7 @@ class CommentController {
 				id,
 				{
 					...commentsList.comments,
-					comments: [...commentsList.comments, comment._id],
+					comments: [comment._id, ...commentsList.comments],
 				},
 				{
 					new: true,
