@@ -37,7 +37,7 @@ const New = () => {
   return (
     <main className="editor wrapper">
       <form onSubmit={submitPost}>
-        <textarea type="text" className="title" id="title" placeholder="Title..." onChange={(e)=>{e.target.style.height = e.target.scrollHeight + "px"}} />
+        <textarea required type="text" className="title" id="title" placeholder="Title..." onChange={(e)=>{e.target.style.height = e.target.scrollHeight + "px"}} />
         <div className="tags">
           { [...Array(tagsNum)].map((x, i)=>(
             <div className="field" key={i}>
@@ -56,7 +56,7 @@ const New = () => {
             </div>
           )) }
         </div>
-        <textarea className="body" id="body" placeholder="Write here..." />
+        <textarea required className="body" id="body" placeholder="Write here..." />
         <nav>
           <button className="btn">Publish</button>
           {/* <Link className="btn hidden toPost" href={"/post/"+router.query._id}>To the post</Link> */}
