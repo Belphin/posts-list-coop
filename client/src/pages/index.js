@@ -52,7 +52,7 @@ const Home = () => {
     <main className="home wrapper">
       <div className="posts" ref={postsRef}>
         { posts.length == 0?
-            <div>Loading...</div>
+            null
           :
             posts.map((post, i) => (
               <Link className="post" href={"/post/" + post._id} key={i}>
