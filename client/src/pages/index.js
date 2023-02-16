@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react"
 // next
 import Link from "next/link"
 
-const Home = ({ headerRef }) => {
+const Home = () => {
   const [observerTriggerSeen, setObserverTriggerSeen] = useState(false)
   const postsPerPage = 8
   const page = useRef(0)
