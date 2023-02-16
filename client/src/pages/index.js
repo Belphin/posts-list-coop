@@ -31,8 +31,7 @@ const Home = () => {
     // set an observer
     observer.current = new IntersectionObserver(entries => {
       const trigger = entries[0]
-      const nextPostsNum = (page.current+1) * postsPerPage - postsPerPage
-      if(trigger.isIntersecting && nextPostsNum <= maxCount.current) setObserverTriggerSeen(true)
+      if(trigger.isIntersecting) setObserverTriggerSeen(true)
       else setObserverTriggerSeen(false)
     })
 
@@ -65,7 +64,7 @@ const Home = () => {
               </Link>
             ))
         }
-        <div className="observerTrigger" ref={observerTrigger} />
+        {(page.current+1) * postsPerPage - postsPerPage <= maxCount.current && <div className="observerTrigger" ref={observerTrigger}>Loading...</div> }
       </div>
     </main>
   )
