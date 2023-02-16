@@ -9,6 +9,7 @@ const Home = () => {
   const page = useRef(0)
   const maxCount = useRef(0)
   const [posts, setPosts] = useState([])
+  const postsRef = useRef()
   const observer = useRef()
   const observerTrigger = useRef()
 
@@ -21,12 +22,16 @@ const Home = () => {
       })
   }
 
+  const addPosts = () => {
+    page.current = page.current + 1
+    getPosts(page.current)
+  }
+
   useEffect(()=>{
     // set an observer
     observer.current = new IntersectionObserver(entries => {
       const trigger = entries[0]
-      const nextPostsNum = (page.current+1) * postsPerPage - postsPerPage
-      if(trigger.isIntersecting && nextPostsNum <= maxCount.current) setObserverTriggerSeen(true)
+      if(trigger.isIntersecting) setObserverTriggerSeen(true)
       else setObserverTriggerSeen(false)
     })
 
@@ -35,17 +40,19 @@ const Home = () => {
   }, [])
 
   useEffect(()=>{
-    if(observerTriggerSeen){
-      page.current = page.current + 1
-      getPosts(page.current)
-    }
+    if(observerTriggerSeen) addPosts()
   }, [observerTriggerSeen])
+
+  useEffect(()=>{
+    // load more posts if loaded posts do not overflow the page
+    if(maxCount.current && document.querySelector("header").clientHeight + postsRef.current.clientHeight - 100 < window.innerHeight) addPosts()
+  }, [posts])
 
   return(
     <main className="home wrapper">
-      <div className="posts">
+      <div className="posts" ref={postsRef}>
         { posts.length == 0?
-            <div>Loading...</div>
+            null
           :
             posts.map((post, i) => (
               <Link className="post" href={"/post/" + post._id} key={i}>
@@ -57,7 +64,7 @@ const Home = () => {
               </Link>
             ))
         }
-        <div className="observerTrigger" ref={observerTrigger} />
+        {(page.current+1) * postsPerPage - postsPerPage <= maxCount.current && <div className="observerTrigger" ref={observerTrigger}>Loading...</div> }
       </div>
     </main>
   )

@@ -27,7 +27,8 @@ const Header = () => {
           </>
           :
           <>
-            <button className="btn" onClick={logInOut}>Log In</button>
+            <button className="btn outline" onClick={logInOut}>Log in</button>
+            <button className="btn">Sign Up</button>
           </>
         }
       </nav>
