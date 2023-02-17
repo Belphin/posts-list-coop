@@ -1,5 +1,5 @@
 // react
-import { useEffect, useState, useRef } from "react"
+import { useLayoutEffect, useEffect, useState, useRef } from "react"
 // next
 import Link from "next/link"
 
