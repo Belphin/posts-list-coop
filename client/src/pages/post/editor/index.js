@@ -30,7 +30,6 @@ const New = () => {
       },
       body: JSON.stringify(data),
     })
-      // .then(() => document.querySelector('main.editor form nav .toPost').click())
       .then(() => document.querySelector('header .logo').click())
   }
 
@@ -72,7 +71,6 @@ const New = () => {
         />
         <nav>
           <button className="btn">Publish</button>
-          {/* <Link className="btn hidden toPost" href={"/post/"+router.query._id}>To the post</Link> */}
         </nav>
       </form>
       
