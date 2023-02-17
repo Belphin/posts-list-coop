@@ -37,17 +37,6 @@ main.editor{
     }
   }
   form{
-    display: flex;
-    flex-flow: column;
-    gap: .5rem;
-    input, textarea{
-      width: 100%;
-      background: #efefef;
-      border: none;
-      outline: none !important;
-      border-radius: .5rem;
-      padding: 1rem;
-    }
     textarea{
       resize: none;
     }

@@ -2,6 +2,7 @@ header{
   position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 1rem 0;
   nav{
     display: flex;
@@ -14,20 +15,18 @@ header{
     }
     .menuBtn{
       cursor: pointer;
-      position: relative;
-      display: flex;
-      flex-flow: column;
-      justify-content: center;
-      align-items: center;
-      width: 2rem;
+      height: 100%;
       aspect-ratio: 1/1;
-      background: url("https://avatars.githubusercontent.com/u/110995737?v=4");
-      background-size: cover;
+      background: url("../../public/images/pfp.svg");
+      background-size: 50%;
       background-position: center;
+      background-repeat: no-repeat;
       border: $border;
       border-radius: 50%;
     }
     .menu{
+      position: relative;
+      z-index: 1000;
       opacity: 0;
       pointer-events: none;
       position: absolute;

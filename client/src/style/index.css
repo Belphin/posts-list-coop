@@ -57,6 +57,19 @@ input, textarea {
   outline-color: #F25E5E;
 }
 
+form {
+  display: flex;
+  flex-flow: column;
+  gap: 0.5rem;
+}
+form input, form textarea {
+  background: #efefef;
+  border: none;
+  outline: none !important;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
 :root {
   --wrapper-padding: 1rem;
   --wrapper-max-width: calc(60rem + var(--wrapper-padding)*2);
@@ -74,6 +87,7 @@ header {
   position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 1rem 0;
 }
 header nav {
@@ -88,20 +102,18 @@ header nav #menuBtn {
 }
 header nav .menuBtn {
   cursor: pointer;
-  position: relative;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  width: 2rem;
+  height: 100%;
   aspect-ratio: 1/1;
-  background: url("https://avatars.githubusercontent.com/u/110995737?v=4");
-  background-size: cover;
+  background: url("../../public/images/pfp.svg");
+  background-size: 50%;
   background-position: center;
+  background-repeat: no-repeat;
   border: 0.125rem solid #000;
   border-radius: 50%;
 }
 header nav .menu {
+  position: relative;
+  z-index: 1000;
   opacity: 0;
   pointer-events: none;
   position: absolute;
@@ -217,19 +229,6 @@ main.editor .deleteConfirm .cont nav .cancel {
   font-weight: 500;
   color: #616161;
 }
-main.editor form {
-  display: flex;
-  flex-flow: column;
-  gap: 0.5rem;
-}
-main.editor form input, main.editor form textarea {
-  width: 100%;
-  background: #efefef;
-  border: none;
-  outline: none !important;
-  border-radius: 0.5rem;
-  padding: 1rem;
-}
 main.editor form textarea {
   resize: none;
 }
@@ -269,4 +268,13 @@ main.editor form nav {
 }
 main.editor form nav .btn {
   padding: 0.6rem 1.2rem;
+}
+
+main.sign-up form {
+  max-width: 27rem;
+  padding: 2rem;
+  margin: 0 auto;
+}
+main.sign-up form .btn {
+  padding: 0.75rem 1.25rem;
 }/*# sourceMappingURL=index.css.map */
