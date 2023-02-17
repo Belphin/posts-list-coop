@@ -67,6 +67,7 @@ const Edit = () => {
 
   return (
     <main className="editor wrapper">
+
       { deleteConfirm &&
         <div className="deleteConfirm">
           <div className="cont">
@@ -81,11 +82,19 @@ const Edit = () => {
           </div>
         </div>
       }
+
       <form onSubmit={submitPost}>
-        <textarea required className="title" id="title" placeholder="Title..." value={ title && title } onChange={(e)=>{
-          setTitle(e.target.value)
-          e.target.style.height = e.target.scrollHeight + "px"
-        }} />
+        <textarea
+          required
+          className="title"
+          id="title"
+          placeholder="Title..."
+          value={ title && title }
+          onChange={(e)=>{
+            setTitle(e.target.value)
+            e.target.style.height = e.target.scrollHeight + "px"
+          }}
+        />
         <div className="tags">
           { [...Array(tagsNum)].map((x, i)=>(
             <div className="field" key={i}>
@@ -104,13 +113,21 @@ const Edit = () => {
             </div>
           )) }
         </div>
-        <textarea required className="body" id="body" placeholder="Write here..." value={ body && body } onChange={(e)=>{setBody(e.target.value)}}  />
+        <textarea
+          required
+          className="body"
+          id="body"
+          placeholder="Write here..."
+          value={ body && body }
+          onChange={(e)=>{setBody(e.target.value)}}
+        />
         <nav>
           <div className="delete btn outline red" onClick={()=>{setDeleteConfirm(true)}}>Delete</div>
           <button className="save btn">Save</button>
           <Link className="btn hidden toPost" href={"/post/"+router.query._id}>To the post</Link>
         </nav>
       </form>
+      
     </main>
   )
 }
