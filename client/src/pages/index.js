@@ -13,20 +13,6 @@ const Home = () => {
   const observer = useRef()
   const observerTrigger = useRef()
 
-  const getPosts = async (postNum) => {
-    await fetch("http://localhost:8080/api/post?page="+postNum+"&limit="+postsPerPage, { cache: 'no-store' })
-      .then(res => res.json())
-      .then(data => {
-        if(!maxCount.current) maxCount.current = data.maxCount
-        setPosts([...posts, ...data.posts])
-      })
-  }
-
-  const addPosts = () => {
-    page.current = page.current + 1
-    getPosts(page.current)
-  }
-
   useEffect(()=>{
     // set an observer
     observer.current = new IntersectionObserver(entries => {
@@ -42,6 +28,20 @@ const Home = () => {
   useEffect(()=>{
     if(observerTriggerSeen) addPosts()
   }, [observerTriggerSeen])
+
+  const addPosts = () => {
+    page.current = page.current + 1
+    getPosts(page.current)
+  }
+
+  const getPosts = async (postNum) => {
+    await fetch("http://localhost:8080/api/post?page="+postNum+"&limit="+postsPerPage, { cache: 'no-store' })
+      .then(res => res.json())
+      .then(data => {
+        if(!maxCount.current) maxCount.current = data.maxCount
+        setPosts([...posts, ...data.posts])
+      })
+  }
 
   useEffect(()=>{
     // load more posts if loaded posts do not overflow the page
