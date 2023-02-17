@@ -10,6 +10,11 @@ main.post{
       font-size: .875rem;
       color: #555;
     }
+    .body{
+      display: flex;
+      flex-flow: column;
+      gap: .2rem;
+    }
     .btn{
       align-self: flex-end;
       margin-top: 1rem;

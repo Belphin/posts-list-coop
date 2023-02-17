@@ -187,6 +187,11 @@ main.post .post .tags {
   font-size: 0.875rem;
   color: #555;
 }
+main.post .post .body {
+  display: flex;
+  flex-flow: column;
+  gap: 0.2rem;
+}
 main.post .post .btn {
   align-self: flex-end;
   margin-top: 1rem;
