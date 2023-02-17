@@ -2,7 +2,6 @@ header{
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   padding: 1rem 0;
   nav{
     display: flex;
@@ -15,7 +14,7 @@ header{
     }
     .menuBtn{
       cursor: pointer;
-      height: 100%;
+      height: 2rem;
       aspect-ratio: 1/1;
       background: url("../../public/images/pfp.svg");
       background-size: 50%;
