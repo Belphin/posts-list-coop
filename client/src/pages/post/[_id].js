@@ -1,30 +1,30 @@
 // react
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react"
 // next
-import { useRouter } from "next/router";
-import Link from "next/link";
+import { useRouter } from "next/router"
+import Link from "next/link"
 // redux
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"
 
 const Post = () => {
-	const dispatch = useDispatch();
-	// logged
-	const loggedReducer = useSelector((state) => state.loggedReducer);
+	// redux
+	const dispatch = useDispatch()
+	const loggedReducer = useSelector((state) => state.loggedReducer)
 
-	const router = useRouter();
-	const [post, setPost] = useState();
+	const router = useRouter()
+	const [post, setPost] = useState()
 
 	const getPost = async () => {
 		await fetch("http://localhost:8080/api/post/" + router.query._id, {
 			cache: "no-store",
 		})
 			.then((res) => res.json())
-			.then((data) => setPost(data));
-	};
+			.then((data) => setPost(data))
+	}
 
 	useLayoutEffect(() => {
-		getPost();
-	}, [router]);
+		getPost()
+	}, [router])
 
 	return (
 		<main className="post wrapper">
@@ -54,7 +54,7 @@ const Post = () => {
 				</div>
 			)}
 		</main>
-	);
-};
+	)
+}
 
-export default Post;
+export default Post

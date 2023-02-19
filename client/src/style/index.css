@@ -125,12 +125,14 @@ header nav .menu {
   padding: 0.3rem;
 }
 header nav .menu li {
-  cursor: pointer;
   font-weight: 500;
   border-radius: 0.2rem;
   padding: 0.5rem 1.5rem 0.5rem 0.75rem;
 }
-header nav .menu li:hover {
+header nav .menu li.action {
+  cursor: pointer;
+}
+header nav .menu li.action:hover {
   background: #eee;
 }
 header nav .menu .divider {

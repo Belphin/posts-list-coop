@@ -6,9 +6,8 @@ import { useDispatch, useSelector } from "react-redux"
 import useInput from "@/hooks/useInput"
 
 const SignUp = () => {
+	// redux
   const dispatch = useDispatch()
-
-  // logged
   const loggedReducer = useSelector(state => state.loggedReducer)
   const logInOut = () => dispatch({ type: loggedReducer.logged? "LOG_OUT" : "LOG_IN" })
 

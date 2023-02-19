@@ -1,18 +1,26 @@
 // next
 import Link from "next/link"
-import { useLayoutEffect } from "react"
+import { useEffect, useLayoutEffect, useRef } from "react"
 // redux
 import { useDispatch, useSelector } from "react-redux"
 
 const Header = () => {
+  // redux
   const dispatch = useDispatch()
-
-  // logged
   const loggedReducer = useSelector(state => state.loggedReducer)
   const logInOut = () => dispatch({ type: loggedReducer.logged? "LOG_OUT" : "LOG_IN" })
 
+  const checkboxRef = useRef()
+  const menuRef = useRef()
+
   useLayoutEffect(()=>{
     if(localStorage.getItem("username")) logInOut()
+  }, [])
+
+  useEffect(()=>{
+    document.addEventListener("click", (e)=>{
+      if(e.target.contains(menuRef.current) && e.target != menuRef.current) checkboxRef.current.checked = false
+    })
   }, [])
 
   return(
@@ -22,13 +30,12 @@ const Header = () => {
         { loggedReducer.logged?
           <>
             <Link className="btn outline" href="/post/editor">New post</Link>
-            <input type="checkbox" id="menuBtn" />
+            <input ref={checkboxRef} type="checkbox" id="menuBtn" />
             <button className="menuBtn" htmlFor="menuBtn" onClick={()=>{const btn = document.querySelector("#menuBtn"); btn.checked = !btn.checked}} />
-            <ul className="menu">
+            <ul ref={menuRef} className="menu">
               <li>{ loggedReducer.username }</li>
               <div className="divider" />
-              <li onClick={()=>{
-                localStorage.removeItem("_id")
+              <li className="action" onClick={()=>{
                 localStorage.removeItem("username")
                 localStorage.removeItem("password")
                 logInOut()
