@@ -1,7 +1,15 @@
 // hooks
 import useInput from "@/hooks/useInput"
+// redux
+import { useDispatch, useSelector } from "react-redux"
 
 const SignUp = () => {
+  const dispatch = useDispatch()
+
+  // logged
+  const loggedReducer = useSelector(state => state.loggedReducer)
+  const logInOut = () => dispatch({ type: loggedReducer.logged? "LOG_OUT" : "LOG_IN" })
+
 	const username = useInput()
 	const password = useInput()
 	const password2 = useInput()
@@ -17,7 +25,15 @@ const SignUp = () => {
 			body: JSON.stringify({ username, password }),
 		})
 			.then((res) => res.json())
-			.then((data) => console.log(data))
+			.then((data) => {
+				console.log(data); ////
+				if(data.message == "User was created"){
+					document.querySelector("header .logo").click()
+					localStorage.setItem("username", username)
+					localStorage.setItem("password", password)
+					logInOut()
+				}
+			})
 	}
 
 	const registration = (e) => {
@@ -26,7 +42,7 @@ const SignUp = () => {
 	}
 
 	return (
-		<main className="sign-up wrapper">
+		<main className="login wrapper">
 			<form onSubmit={registration}>
 				<input
 					minLength="4"

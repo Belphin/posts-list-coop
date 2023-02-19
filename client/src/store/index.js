@@ -4,7 +4,7 @@ import { createStore, combineReducers } from "redux"
 import { loggedReducer } from "./loggedReducer"
 
 const rootReducer = combineReducers({
-  logged: loggedReducer
+  loggedReducer: loggedReducer
 })
 
 export const store = createStore(rootReducer)

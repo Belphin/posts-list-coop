@@ -1,13 +1,19 @@
 const defaultState = {
-  logged: false
+  logged: false,
+  username: null,
+  password: null
 }
 
 export const loggedReducer = (state = defaultState, action) => {
   switch(action.type){
     case "LOG_IN":
-      return { ...state, logged: true }
+      return {
+        logged: true,
+        username: localStorage.getItem("username"),
+        password: localStorage.getItem("password")
+      }
     case "LOG_OUT":
-      return { ...state, logged: false }
+      return { logged: false }
     default:
       return state
   }
