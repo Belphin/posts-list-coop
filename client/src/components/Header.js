@@ -14,10 +14,12 @@ const Header = () => {
   const menuRef = useRef()
 
   useLayoutEffect(()=>{
+    // redux logged = true if logged in
     if(localStorage.getItem("username")) logInOut()
   }, [])
 
   useEffect(()=>{
+    // hide menu on outside click
     document.addEventListener("click", (e)=>{
       if(e.target.contains(menuRef.current) && e.target != menuRef.current) checkboxRef.current.checked = false
     })
