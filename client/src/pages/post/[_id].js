@@ -1,5 +1,5 @@
 // react
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 // next
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 const Post = () => {
 	const dispatch = useDispatch();
 	// logged
-	const logged = useSelector((state) => state.logged);
+	const loggedReducer = useSelector((state) => state.loggedReducer);
 
 	const router = useRouter();
 	const [post, setPost] = useState();
@@ -46,7 +46,7 @@ const Post = () => {
 									.map((paragraph, i) => <p key={i}>{paragraph}</p>)
 							: post.body}
 					</div>
-					{logged.logged && (
+					{loggedReducer.logged && post.author == localStorage.getItem("username") && (
 						<Link className="btn" href={"/post/editor/" + post._id}>
 							Edit
 						</Link>

@@ -28,9 +28,11 @@ const Header = () => {
               <li>{ loggedReducer.username }</li>
               <div className="divider" />
               <li onClick={()=>{
+                localStorage.removeItem("_id")
                 localStorage.removeItem("username")
                 localStorage.removeItem("password")
                 logInOut()
+                document.querySelector("header .logo").click()
               }}>Sign Out</li>
             </ul>
           </>

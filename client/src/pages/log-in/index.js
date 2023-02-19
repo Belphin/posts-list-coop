@@ -26,9 +26,7 @@ const Login = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-        console.log(data);
 				if(!data.message){
-					localStorage.setItem("_id", data._id)
 					localStorage.setItem("username", data.username)
 					localStorage.setItem("password", data.password)
 					logInOut()

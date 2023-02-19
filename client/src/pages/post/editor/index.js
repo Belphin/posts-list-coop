@@ -1,12 +1,10 @@
 // react
 import { useState } from "react"
-// next
-import Link from "next/link"
 
 const New = () => {
   const tagsNum = 4
   const [tags, setTags] = useState(["", "", "", ""])
-  const allowed = [null, '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+  const allowed = [ null, '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' ]
 
   const submitPost = async (e) => {
     e.preventDefault()
@@ -19,7 +17,7 @@ const New = () => {
       title: e.target.querySelector("#title").value,
       tags: finalTags,
       body: e.target.querySelector("#body").value,
-      author: "test"
+      author: localStorage.getItem("username")
     }
     await fetch("http://localhost:8080/api/post", {
       method: "POST",
