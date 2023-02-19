@@ -21,10 +21,7 @@ class UserController {
 		try {
 			const { username, password } = req.body;
 			const user = await User.findOne({ username });
-			if (!user) {
-				return res.json({ message: "User not found" });
-			}
-			if (password !== user.password)
+			if (!user || password !== user.password)
 				return res.status(400).json({ message: "Incorrect login or password" });
 			return res.json(user);
 		} catch (e) {

@@ -1,7 +1,7 @@
-// hooks
-import useInput from "@/hooks/useInput"
 // redux
 import { useDispatch, useSelector } from "react-redux"
+// hooks
+import useInput from "@/hooks/useInput"
 
 const SignUp = () => {
   const dispatch = useDispatch()
@@ -28,10 +28,10 @@ const SignUp = () => {
 			.then((data) => {
 				console.log(data); ////
 				if(data.message == "User was created"){
-					document.querySelector("header .logo").click()
 					localStorage.setItem("username", username)
 					localStorage.setItem("password", password)
 					logInOut()
+					document.querySelector("header .logo").click()
 				}
 			})
 	}
