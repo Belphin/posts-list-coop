@@ -3,6 +3,10 @@ main.login{
     max-width: 27rem;
     padding: 2rem;
     margin: 0 auto;
+    .error{
+      color: red;
+      display: none;
+    }
     .btn{
       padding: .75rem 1.25rem;
     }

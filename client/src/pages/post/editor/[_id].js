@@ -41,7 +41,7 @@ const Edit = () => {
 				title: title,
 				tags: finalTags,
 				body: body,
-				author: "test",
+				author: localStorage.getItem("username"),
 			}),
 		})
 			.then(() => document.querySelector("main.editor form nav .toPost").click())
