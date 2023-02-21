@@ -24,17 +24,6 @@ class CommentController {
 		}
 	}
 
-	async getList(req, res) {
-		try {
-			const { id } = req.params;
-			const commentsList = await CommentsList.findById(id);
-			return res.json(commentsList);
-		} catch (e) {
-			console.log(e);
-			res.send({ message: "Server error" });
-		}
-	}
-
 	async getOne(req, res) {
 		try {
 			const { id } = req.params;

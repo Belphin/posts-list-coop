@@ -35,7 +35,6 @@
 ### GET:
 
 /:id <span style='color: green; font-weight: 700'>-----></span> getOne</br>
-/list/:id <span style='color: green; font-weight: 700'>-----></span>getList</br>
 /page/:id?limit&page <span style='color: green; font-weight: 700'>-----></span>getPage</br>
 
 ### POST:

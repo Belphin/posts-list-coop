@@ -1,6 +1,6 @@
 const Router = require("express");
-const PostController = require("../controllers/PostController");
 const router = new Router();
+const PostController = require("../controllers/post.controller");
 
 router.post("/", PostController.create);
 router.get("/", PostController.getAll);
