@@ -10,7 +10,7 @@ class UserController {
 			}
 			const { username, password, role } = req.body;
 			const token = await UserService.registration(username, password, role);
-			res.json({ token });
+			res.json({ username, token });
 		} catch (e) {
 			console.log(e);
 			res.status(400).send({ message: e.message });
@@ -21,7 +21,7 @@ class UserController {
 		try {
 			const { username, password, role } = req.body;
 			const token = await UserService.login(username, password, role);
-			return res.json({ token });
+			return res.json({ username, token });
 		} catch (e) {
 			console.log(e);
 			res.status(400).send({ message: e.message });
