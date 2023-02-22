@@ -27,33 +27,36 @@ const Post = () => {
 	}, [router])
 
 	return (
-		<main className="post wrapper">
-			{!post && <div>Loading...</div>}
-			{post && (
-				<div className="post">
-					<h1 className="title">{post.title}</h1>
-					{post.tags && post.tags.length ? (
-						<ul className="tags">
-							{post.tags.map((tag, i) => (
-								<li key={i}>#{tag}</li>
-							))}
-						</ul>
-					) : null}
-					<div className="body">
-						{post.body && post.body.includes("\n")
-							? post.body
-									.split("\n")
-									.map((paragraph, i) => <p key={i}>{paragraph}</p>)
-							: post.body}
-					</div>
-					{loggedReducer.logged && post.author == localStorage.getItem("username") && (
-						<Link className="btn" href={"/post/editor/" + post._id}>
-							Edit
-						</Link>
-					)}
-				</div>
-			)}
-		</main>
+		<>
+			{ post?
+					<main className="post wrapper">
+						<div className="post">
+							<h1 className="title">{post.title}</h1>
+							{post.tags && post.tags.length ? (
+								<ul className="tags">
+									{post.tags.map((tag, i) => (
+										<li key={i}>#{tag}</li>
+									))}
+								</ul>
+							) : null}
+							<div className="body">
+								{post.body && post.body.includes("\n")
+									? post.body
+											.split("\n")
+											.map((paragraph, i) => <p key={i}>{paragraph}</p>)
+									: post.body}
+							</div>
+							{loggedReducer.logged && post.author == localStorage.getItem("username") && (
+								<Link className="btn" href={"/post/editor/" + post._id}>
+									Edit
+								</Link>
+							)}
+						</div>
+					</main>
+				:
+					<div className="wrapper">Loading...</div>
+			}
+		</>
 	)
 }
 

@@ -1,5 +1,5 @@
 // react
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 // redux
 import { useDispatch, useSelector } from "react-redux"
 // hooks
@@ -11,6 +11,7 @@ const SignUp = () => {
   const loggedReducer = useSelector(state => state.loggedReducer)
   const logInOut = () => dispatch({ type: loggedReducer.logged? "LOG_OUT" : "LOG_IN" })
 
+	const [localStorageUsername, setLocalStorageUsername] = useState()
 	const username = useInput()
 	const usernameRef = useRef()
 	const password = useInput()
@@ -53,56 +54,66 @@ const SignUp = () => {
 		}
 	}
 
+	useEffect(()=>{
+		setLocalStorageUsername(localStorage.getItem("username"))
+	}, [])
+
 	return (
-		<main className="login wrapper">
-			<form onSubmit={registration}>
-				<input
-					ref={usernameRef}
-					minLength="4"
-					maxLength="16"
-					value={username.value}
-					onChange={(e)=>{
-						username.onChange(e)
-						usernameRef.current.style.outline = "none"
-						userExists.current.style.display = "none"
-					}}
-					required
-					type="text"
-					placeholder="Username"
-				/>
-				<div ref={userExists} className="error">User already exists</div>
-				<input
-					ref={passwordRef}
-					minLength="4"
-					maxLength="16"
-					value={password.value}
-					onChange={(e)=>{
-						password.onChange(e)
-						passwordRef.current.style.outline = "none"
-						diffPass.current.style.display = "none"
-					}}
-					required
-					type="password"
-					placeholder="Password"
-				/>
-				<input
-					ref={passwordRef}
-					minLength="4"
-					maxLength="16"
-					value={password2.value}
-					onChange={(e)=>{
-						password2.onChange(e)
-						passwordRef.current.style.outline = "none"
-						diffPass.current.style.display = "none"
-					}}
-					required
-					type="password"
-					placeholder="Confirm the password"
-				/>
-				<div ref={diffPass} className="error">Passwords are different</div>
-				<button className="btn">Sign up</button>
-			</form>
-		</main>
+		<>
+			{ localStorageUsername?
+					<div className="wrapper">Forbidden 403</div>
+				:
+					<main className="login wrapper">
+						<form onSubmit={registration}>
+							<input
+								ref={usernameRef}
+								minLength="4"
+								maxLength="16"
+								value={username.value}
+								onChange={(e)=>{
+									username.onChange(e)
+									usernameRef.current.style.outline = "none"
+									userExists.current.style.display = "none"
+								}}
+								required
+								type="text"
+								placeholder="Username"
+							/>
+							<div ref={userExists} className="error">User already exists</div>
+							<input
+								ref={passwordRef}
+								minLength="4"
+								maxLength="16"
+								value={password.value}
+								onChange={(e)=>{
+									password.onChange(e)
+									passwordRef.current.style.outline = "none"
+									diffPass.current.style.display = "none"
+								}}
+								required
+								type="password"
+								placeholder="Password"
+							/>
+							<input
+								ref={passwordRef}
+								minLength="4"
+								maxLength="16"
+								value={password2.value}
+								onChange={(e)=>{
+									password2.onChange(e)
+									passwordRef.current.style.outline = "none"
+									diffPass.current.style.display = "none"
+								}}
+								required
+								type="password"
+								placeholder="Confirm the password"
+							/>
+							<div ref={diffPass} className="error">Passwords are different</div>
+							<button className="btn">Sign up</button>
+						</form>
+					</main>
+			}
+		</>
 	)
 }
 
