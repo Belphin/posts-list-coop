@@ -78,9 +78,9 @@ const Edit = () => {
 			},
 			body: JSON.stringify({
 				_id: router.query._id,
-				title: title,
+				title,
 				tags: finalTags,
-				body: body,
+				body,
 				author: localStorage.getItem("username"),
 			}),
 		}).then(() =>
