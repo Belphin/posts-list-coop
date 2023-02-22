@@ -1,32 +1,30 @@
-const User = require("../models/User");
+const UserService = require("../services/user.service");
+const { validationResult } = require("express-validator");
 
 class UserController {
 	async registration(req, res) {
 		try {
-			const { username, password } = req.body;
-			const candidate = await User.findOne({ username });
-			if (candidate) {
-				return res.json({ message: `User already registered` });
+			const errors = validationResult(req);
+			if (!errors.isEmpty()) {
+				return res.status(400).json({ message: "Registration error", errors });
 			}
-			const user = new User({ username, password });
-			await user.save();
-			res.json({ message: "User was created" });
+			const { username, password, role } = req.body;
+			const token = await UserService.registration(username, password, role);
+			res.json({ token });
 		} catch (e) {
 			console.log(e);
-			res.send({ message: "Server error" });
+			res.status(400).send({ message: e.message });
 		}
 	}
 
 	async login(req, res) {
 		try {
-			const { username, password } = req.body;
-			const user = await User.findOne({ username });
-			if (!user || password !== user.password)
-				return res.status(400).json({ message: "Incorrect login or password" });
-			return res.json(user);
+			const { username, password, role } = req.body;
+			const token = await UserService.login(username, password, role);
+			return res.json({ token });
 		} catch (e) {
 			console.log(e);
-			res.send({ message: "Server error" });
+			res.status(400).send({ message: e.message });
 		}
 	}
 }
