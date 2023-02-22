@@ -1,62 +1,36 @@
-// react
-import { useLayoutEffect, useState } from "react"
 // next
-import { useRouter } from "next/router"
 import Link from "next/link"
-// redux
-import { useDispatch, useSelector } from "react-redux"
 
-const Post = () => {
-	// redux
-	const dispatch = useDispatch()
-	const loggedReducer = useSelector((state) => state.loggedReducer)
-
-	const router = useRouter()
-	const [post, setPost] = useState()
-
-	const getPost = async () => {
-		await fetch("http://localhost:8080/api/post/" + router.query._id, {
-			cache: "no-store",
-		})
-			.then((res) => res.json())
-			.then((data) => setPost(data))
+export const getServerSideProps = async (context) => {
+	const res = await fetch(`http://localhost:8080/api/post/${context.query._id}`)
+	const data = await res.json()
+	return {
+		props: data
 	}
+}
 
-	useLayoutEffect(() => {
-		getPost()
-	}, [router])
-
+const Post = (data) => {
 	return (
-		<>
-			{ post?
-					<main className="post wrapper">
-						<div className="post">
-							<h1 className="title">{post.title}</h1>
-							{post.tags && post.tags.length ? (
-								<ul className="tags">
-									{post.tags.map((tag, i) => (
-										<li key={i}>#{tag}</li>
-									))}
-								</ul>
-							) : null}
-							<div className="body">
-								{post.body && post.body.includes("\n")
-									? post.body
-											.split("\n")
-											.map((paragraph, i) => <p key={i}>{paragraph}</p>)
-									: post.body}
-							</div>
-							{loggedReducer.logged && post.author == localStorage.getItem("username") && (
-								<Link className="btn" href={"/post/editor/" + post._id}>
-									Edit
-								</Link>
-							)}
-						</div>
-					</main>
-				:
-					<div className="wrapper">Loading...</div>
-			}
-		</>
+		<main className="post wrapper">
+			<div className="post">
+				<h1 className="title">{data.title}</h1>
+				{ data.tags.length != 0 &&
+						<ul className="tags">
+							{ data.tags.map((tag, i) => {
+								if(tag.length) return <li key={i}>#{tag}</li>
+							}) }
+						</ul>
+				}
+				<div className="body">
+					{ data.body.includes("\n")?
+							data.body.split("\n").map((paragraph, i) => <p key={i}>{paragraph}</p>)
+						:
+							data.body
+					}
+				</div>
+				<Link className="btn" href={`/post/editor/${data._id}`}>Edit</Link>
+			</div>
+		</main>
 	)
 }
 
