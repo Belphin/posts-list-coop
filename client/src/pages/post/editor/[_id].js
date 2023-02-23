@@ -26,29 +26,27 @@ const Edit = (data) => {
 
 	const submitPost = async (e) => {
 		e.preventDefault()
-		await axios.post(`http://localhost:8080/api/post/`,
-			{ _id: router.query._id, title, tags, body, author: localStorage.getItem("username") },
-			{
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json",
-					Authorization: "Bearer " + localStorage.getItem("token"),
-				}
+		const data = { _id: router.query._id, title, tags, body, author: localStorage.getItem("username") }
+		const config = {
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + localStorage.getItem("token"),
 			}
-		)
+		}
+		await axios.post(`http://localhost:8080/api/post/`, data, config)
 			.then(() => router.push("/"))
 			.catch(e => console.log(e.message))
 	}
 
 	const deletePost = async () => {
-		await axios.delete(`http://localhost:8080/api/post/${data._id}`,
-			{
-				headers: {
-					Authorization: "Bearer " + localStorage.getItem("token"),
-					Author: localStorage.getItem("username")
-				}
+		const config = {
+			headers: {
+				Authorization: "Bearer " + localStorage.getItem("token"),
+				Author: localStorage.getItem("username")
 			}
-		)
+		}
+		await axios.delete(`http://localhost:8080/api/post/${data._id}`, config)
 			.then(() => router.push("/"))
 			.catch(e => console.log(e.message))
 	}

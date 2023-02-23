@@ -23,15 +23,14 @@ const Login = () => {
 
 	const login = async (e) => {
 		e.preventDefault()
-		await axios.post(`http://localhost:8080/api/auth/login/`,
-			{ username, password },
-			{
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json",
-				}
+		const data = { username, password }
+		const config = {
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
 			}
-		)
+		}
+		await axios.post(`http://localhost:8080/api/auth/login/`, data, config)
 			.then(res => res.data)
 			.then(data => {
 				if(!data.message) {

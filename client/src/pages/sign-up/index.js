@@ -25,16 +25,15 @@ const SignUp = () => {
 
 	const registration = async (e) => {
 		e.preventDefault()
+		const data = { username, password }
+		const config = {
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			}
+		}
 		if(password === password_2){
-			await axios.post("http://localhost:8080/api/auth/registration",
-				{ username, password },
-				{
-					headers: {
-						Accept: "application/json",
-						"Content-Type": "application/json",
-					}
-				}
-			)
+			await axios.post("http://localhost:8080/api/auth/registration", data, config)
 				.then(res => res.data)
 				.then(data => {
 					if(!data.message){

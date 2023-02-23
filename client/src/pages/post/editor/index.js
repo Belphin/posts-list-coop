@@ -15,16 +15,15 @@ const New = () => {
 
 	const submitPost = async (e) => {
 		e.preventDefault()
-		await axios.post(`http://localhost:8080/api/post`,
-			{ title, tags, body, author: localStorage.getItem("username") },
-			{
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json",
-					Authorization: "Bearer " + localStorage.getItem("token"),
-				}
+		const data = { title, tags, body, author: localStorage.getItem("username") }
+		const config = {
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + localStorage.getItem("token"),
 			}
-		)
+		}
+		await axios.post(`http://localhost:8080/api/post`, data, config)
 			.then(() => router.push("/"))
 			.catch(e => console.log(e.message))
 	}
