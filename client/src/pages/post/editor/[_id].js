@@ -44,10 +44,8 @@ const Edit = (data) => {
 			method: "DELETE",
 			headers: {
 				Authorization: "Bearer " + localStorage.getItem("token"),
-			},
-			body: JSON.stringify(
-				{ author: localStorage.getItem("username") }
-			)
+				Author: localStorage.getItem("username")
+			}
 		})
 			.then(() => router.push("/"))
 			.catch(e => console.log(e.message))

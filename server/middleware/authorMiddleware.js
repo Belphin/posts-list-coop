@@ -4,17 +4,14 @@ module.exports = function (req, res, next) {
 	if (req.method === "OPTIONS") {
 		next();
 	}
-	if (req.method === "DELETE") {
-		console.log(req.params.id);
-	}
 	try {
 		const token = req.headers.authorization.split(" ")[1];
+		const author = req.body.author || req.headers.author;
 		if (!token) {
 			return res.status(403).json({ message: "User not authorized" });
 		}
 		const { username, role } = jwt.verify(token, process.env.SECRET_KEY);
-		console.log(req.body);
-		if (req.body.author !== username && role !== "ADMIN") {
+		if (author !== username && role !== "ADMIN") {
 			return res.status(403).json({ message: "No access" });
 		}
 		next();
