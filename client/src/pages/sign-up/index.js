@@ -1,3 +1,5 @@
+// axios
+import axios from "axios"
 // react
 import { useRef, useState } from "react"
 // redux
@@ -24,15 +26,16 @@ const SignUp = () => {
 	const registration = async (e) => {
 		e.preventDefault()
 		if(password === password_2){
-			await fetch("http://localhost:8080/api/auth/registration", {
-				method: "POST",
-				headers: {
-					Accept: "application/json",
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({ username, password }),
-			})
-				.then(res => res.json())
+			await axios.post("http://localhost:8080/api/auth/registration",
+				{ username, password },
+				{
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json",
+					}
+				}
+			)
+				.then(res => res.data)
 				.then(data => {
 					if(!data.message){
 						localStorage.setItem("username", username)

@@ -1,3 +1,5 @@
+// axios
+import axios from "axios"
 // react
 import { useState } from "react"
 // next
@@ -13,17 +15,16 @@ const New = () => {
 
 	const submitPost = async (e) => {
 		e.preventDefault()
-		await fetch("http://localhost:8080/api/post", {
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				Authorization: "Bearer " + localStorage.getItem("token"),
-			},
-			body: JSON.stringify(
-				{title, tags, body, author: localStorage.getItem("username")}
-			),
-		})
+		await axios.post(`http://localhost:8080/api/post`,
+			{ title, tags, body, author: localStorage.getItem("username") },
+			{
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+					Authorization: "Bearer " + localStorage.getItem("token"),
+				}
+			}
+		)
 			.then(() => router.push("/"))
 			.catch(e => console.log(e.message))
 	}

@@ -1,3 +1,5 @@
+// axios
+import axios from "axios"
 // react
 import { useState } from "react"
 // next
@@ -24,29 +26,29 @@ const Edit = (data) => {
 
 	const submitPost = async (e) => {
 		e.preventDefault()
-		await fetch(`http://localhost:8080/api/post/`, {
-			method: "PUT",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				Authorization: "Bearer " + localStorage.getItem("token"),
-			},
-			body: JSON.stringify(
-				{_id: router.query._id, title, tags, body, author: localStorage.getItem("username")}
-			)
-		})
+		await axios.post(`http://localhost:8080/api/post/`,
+			{ _id: router.query._id, title, tags, body, author: localStorage.getItem("username") },
+			{
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+					Authorization: "Bearer " + localStorage.getItem("token"),
+				}
+			}
+		)
 			.then(() => router.push("/"))
 			.catch(e => console.log(e.message))
 	}
 
 	const deletePost = async () => {
-		await fetch(`http://localhost:8080/api/post/${data._id}`, {
-			method: "DELETE",
-			headers: {
-				Authorization: "Bearer " + localStorage.getItem("token"),
-				Author: localStorage.getItem("username")
+		await axios.delete(`http://localhost:8080/api/post/${data._id}`,
+			{
+				headers: {
+					Authorization: "Bearer " + localStorage.getItem("token"),
+					Author: localStorage.getItem("username")
+				}
 			}
-		})
+		)
 			.then(() => router.push("/"))
 			.catch(e => console.log(e.message))
 	}

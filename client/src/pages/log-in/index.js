@@ -1,5 +1,7 @@
+// axios
+import axios from "axios"
 // react
-import { useEffect, useState, useRef } from "react"
+import { useState, useRef } from "react"
 // redux
 import { useDispatch, useSelector } from "react-redux"
 // next
@@ -21,15 +23,16 @@ const Login = () => {
 
 	const login = async (e) => {
 		e.preventDefault()
-		await fetch(`http://localhost:8080/api/auth/login/`, {
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ username, password }),
-		})
-			.then(res => res.json())
+		await axios.post(`http://localhost:8080/api/auth/login/`,
+			{ username, password },
+			{
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				}
+			}
+		)
+			.then(res => res.data)
 			.then(data => {
 				if(!data.message) {
 					localStorage.setItem("username", data.username)

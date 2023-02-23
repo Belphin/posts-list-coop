@@ -1,3 +1,5 @@
+// axios
+import axios from "axios"
 // react
 import { useEffect, useState, useRef } from "react"
 // next
@@ -35,8 +37,8 @@ const Home = () => {
 	}
 
 	const getPosts = async (postNum) => {
-		await fetch(`http://localhost:8080/api/post?page=${postNum}&limit=${postsPerPage}`)
-			.then(res => res.json())
+		await axios.get(`http://localhost:8080/api/post?page=${postNum}&limit=${postsPerPage}`)
+			.then(res => res.data)
 			.then(data => {
 				if(!maxCount.current) maxCount.current = data.maxCount
 				setPosts([...posts, ...data.posts])
