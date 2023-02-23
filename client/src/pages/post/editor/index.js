@@ -1,7 +1,10 @@
 // react
 import { useState } from "react"
+// next
+import { useRouter } from "next/router"
 
 const New = () => {
+	const router = useRouter()
 	const [title, setTitle] = useState("")
 	const [body, setBody] = useState("")
 	const tagsNum = 4
@@ -21,7 +24,8 @@ const New = () => {
 				{title, tags, body, author: localStorage.getItem("username")}
 			),
 		})
-			.then(() => document.querySelector("header .logo").click())
+			.then(() => router.push("/"))
+			.catch(e => console.log(e.message))
 	}
 
 	return (

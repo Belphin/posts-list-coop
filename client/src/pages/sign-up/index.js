@@ -34,7 +34,6 @@ const SignUp = () => {
 			})
 				.then(res => res.json())
 				.then(data => {
-					console.log(data);
 					if(!data.message){
 						localStorage.setItem("username", username)
 						localStorage.setItem("token", data.token)

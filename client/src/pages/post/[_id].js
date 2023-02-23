@@ -2,8 +2,9 @@
 import Link from "next/link"
 
 export const getServerSideProps = async (context) => {
-	const res = await fetch(`http://localhost:8080/api/post/${context.query._id}`)
-	const data = await res.json()
+	const data = await fetch(`http://localhost:8080/api/post/${context.query._id}`)
+		.then(res => res.json())
+		.catch(e => console.log(e.message))
 	return {
 		props: data
 	}

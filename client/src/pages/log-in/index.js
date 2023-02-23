@@ -31,18 +31,17 @@ const Login = () => {
 		})
 			.then(res => res.json())
 			.then(data => {
-				console.log(data);
-				// if(!data.message) {
-				// 	localStorage.setItem("username", data.username)
-				// 	localStorage.setItem("token", data.token)
-				// 	logInOut()
-				// 	router.push("/")
-				// }
-				// else if (data.message == "Incorrect login or password") {
-				// 	usernameRef.current.style.outline = ".125rem solid red"
-				// 	passwordRef.current.style.outline = ".125rem solid red"
-				// 	errorRef.current.style.display = "block"
-				// }
+				if(!data.message) {
+					localStorage.setItem("username", data.username)
+					localStorage.setItem("token", data.token)
+					logInOut()
+					router.push("/")
+				}
+				else if (data.message == "Incorrect login or password") {
+					usernameRef.current.style.outline = ".125rem solid red"
+					passwordRef.current.style.outline = ".125rem solid red"
+					errorRef.current.style.display = "block"
+				}
 			})
 			.catch(e => console.log(e))
 	}

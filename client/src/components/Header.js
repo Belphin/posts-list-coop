@@ -1,5 +1,5 @@
 // react
-import { useEffect, useLayoutEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 // redux
 import { useDispatch, useSelector } from "react-redux"
 // next
@@ -17,7 +17,7 @@ const Header = () => {
   const checkboxRef = useRef()
   const menuRef = useRef()
 
-  useLayoutEffect(()=>{
+  useEffect(()=>{
     // redux logged = true if logged in
     if(localStorage.getItem("username")) logInOut()
   }, [])

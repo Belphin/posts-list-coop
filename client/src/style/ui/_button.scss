@@ -6,7 +6,7 @@
   font-size: .8335rem;
   font-weight: 700;
   color: #fff;
-  background: #000;
+  background: $black;
   border: none;
   border-radius: .5rem;
   padding: .5rem 1rem;
@@ -14,9 +14,9 @@
   &.red{ background: $red; }
   &.green{ background: $green; }
   &.outline{
-    color: #000;
+    color: $black;
     background: none;
-    outline: .125rem solid #000;
+    outline: .125rem solid $black;
     outline-offset: -0.125rem;
     &.red{
       color: $red;

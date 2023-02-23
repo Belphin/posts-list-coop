@@ -5,8 +5,9 @@ import { useRouter } from "next/router"
 import Link from "next/link"
 
 export const getServerSideProps = async (context) => {
-	const res = await fetch(`http://localhost:8080/api/post/${context.query._id}`)
-	const data = await res.json()
+	const data = await fetch(`http://localhost:8080/api/post/${context.query._id}`)
+		.then(res => res.json())
+		.catch(e => console.log(e.message))
 	return {
 		props: data
 	}
@@ -23,7 +24,7 @@ const Edit = (data) => {
 
 	const submitPost = async (e) => {
 		e.preventDefault()
-		await fetch("http://localhost:8080/api/post/", {
+		await fetch(`http://localhost:8080/api/post/`, {
 			method: "PUT",
 			headers: {
 				Accept: "application/json",
@@ -34,17 +35,22 @@ const Edit = (data) => {
 				{_id: router.query._id, title, tags, body, author: localStorage.getItem("username")}
 			)
 		})
-			.then(() => document.querySelector("main.editor form nav .toPost").click())
+			.then(() => router.push("/"))
+			.catch(e => console.log(e.message))
 	}
 
 	const deletePost = async () => {
-		await fetch("http://localhost:8080/api/post/" + router.query._id, {
+		await fetch(`http://localhost:8080/api/post/${data._id}`, {
 			method: "DELETE",
 			headers: {
 				Authorization: "Bearer " + localStorage.getItem("token"),
-			}
+			},
+			body: JSON.stringify(
+				{ author: localStorage.getItem("username") }
+			)
 		})
-			.then(() => document.querySelector("header .logo").click())
+			.then(() => router.push("/"))
+			.catch(e => console.log(e.message))
 	}
 
 	return (
