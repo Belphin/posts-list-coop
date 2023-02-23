@@ -1,123 +1,109 @@
 // react
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 // redux
 import { useDispatch, useSelector } from "react-redux"
-// hooks
-import useInput from "@/hooks/useInput"
+// next
+import { useRouter } from "next/router"
 
 const SignUp = () => {
+	const router = useRouter()
+
 	// redux
 	const dispatch = useDispatch()
 	const loggedReducer = useSelector((state) => state.loggedReducer)
 	const logInOut = () => dispatch({ type: loggedReducer.logged ? "LOG_OUT" : "LOG_IN" })
 
-	const [localStorageUsername, setLocalStorageUsername] = useState()
-	const username = useInput()
+	const [username, setUsername] = useState("")
+	const [password, setPassword] = useState("")
+	const [password_2, setPassword_2] = useState("")
 	const usernameRef = useRef()
-	const password = useInput()
-	const password2 = useInput()
 	const passwordRef = useRef()
 	const userExists = useRef()
 	const diffPass = useRef()
 
-	const createUser = async (username, password) => {
-		await fetch("http://localhost:8080/api/auth/registration", {
-			method: "POST",
-			cache: "no-cache",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ username, password }),
-		})
-			.then(res => res.json())
-			.then(data => {
-				if (data.message == "User was created") {
-					localStorage.setItem("username", username)
-					localStorage.setItem("token", token)
-					logInOut()
-					document.querySelector("header .logo").click()
-				} else if (data.message == "User already registered") {
-					usernameRef.current.style.outline = ".125rem solid red"
-					userExists.current.style.display = "block"
-				}
-			})
-	}
-
-	const registration = (e) => {
+	const registration = async (e) => {
 		e.preventDefault()
-		if (password.value === password2.value)
-			createUser(username.value, password.value)
+		if(password === password_2){
+			await fetch("http://localhost:8080/api/auth/registration", {
+				method: "POST",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ username, password }),
+			})
+				.then(res => res.json())
+				.then(data => {
+					console.log(data);
+					if(!data.message){
+						localStorage.setItem("username", username)
+						localStorage.setItem("token", data.token)
+						logInOut()
+						router.push("/")
+					}
+					else if(data.message == "User already registered") {
+						usernameRef.current.style.outline = ".125rem solid red"
+						userExists.current.style.display = "block"
+					}
+				})
+				.catch(e => console.log(e.message))
+		}
 		else {
 			passwordRef.current.style.outline = ".125rem solid red"
 			diffPass.current.style.display = "block"
 		}
 	}
 
-	useEffect(() => {
-		setLocalStorageUsername(localStorage.getItem("username"))
-	}, [])
-
 	return (
-		<>
-			{ localStorageUsername ?
-					<div className="wrapper">Forbidden 403</div>
-				:
-					<main className="login wrapper">
-						<form onSubmit={registration}>
-							<input
-								ref={usernameRef}
-								minLength="4"
-								maxLength="16"
-								value={username.value}
-								onChange={(e) => {
-									username.onChange(e)
-									usernameRef.current.style.outline = "none"
-									userExists.current.style.display = "none"
-								}}
-								required
-								type="text"
-								placeholder="Username"
-							/>
-							<div ref={userExists} className="error">
-								User already exists
-							</div>
-							<input
-								ref={passwordRef}
-								minLength="4"
-								maxLength="16"
-								value={password.value}
-								onChange={(e) => {
-									password.onChange(e)
-									passwordRef.current.style.outline = "none"
-									diffPass.current.style.display = "none"
-								}}
-								required
-								type="password"
-								placeholder="Password"
-							/>
-							<input
-								ref={passwordRef}
-								minLength="4"
-								maxLength="16"
-								value={password2.value}
-								onChange={(e) => {
-									password2.onChange(e)
-									passwordRef.current.style.outline = "none"
-									diffPass.current.style.display = "none"
-								}}
-								required
-								type="password"
-								placeholder="Confirm the password"
-							/>
-							<div ref={diffPass} className="error">
-								Passwords are different
-							</div>
-							<button className="btn">Sign up</button>
-						</form>
-					</main>
-			}
-		</>
+		<main className="login wrapper">
+			<form onSubmit={registration}>
+				<input
+					ref={usernameRef}
+					minLength="4"
+					maxLength="16"
+					value={username}
+					onChange={(e) => {
+						setUsername(e.target.value)
+						usernameRef.current.style.outline = "none"
+						userExists.current.style.display = "none"
+					}}
+					required
+					type="text"
+					placeholder="Username"
+				/>
+				<div ref={userExists} className="error">User already exists</div>
+				<input
+					ref={passwordRef}
+					minLength="4"
+					maxLength="16"
+					value={password}
+					onChange={(e) => {
+						setPassword(e.target.value)
+						passwordRef.current.style.outline = "none"
+						diffPass.current.style.display = "none"
+					}}
+					required
+					type="password"
+					placeholder="Password"
+				/>
+				<input
+					ref={passwordRef}
+					minLength="4"
+					maxLength="16"
+					value={password_2}
+					onChange={(e) => {
+						setPassword_2(e.target.value)
+						passwordRef.current.style.outline = "none"
+						diffPass.current.style.display = "none"
+					}}
+					required
+					type="password"
+					placeholder="Confirm the password"
+				/>
+				<div ref={diffPass} className="error">Passwords are different</div>
+				<button className="btn">Sign up</button>
+			</form>
+		</main>
 	)
 }
 

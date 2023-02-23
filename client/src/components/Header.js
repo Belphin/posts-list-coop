@@ -1,10 +1,14 @@
-// next
-import Link from "next/link"
+// react
 import { useEffect, useLayoutEffect, useRef } from "react"
 // redux
 import { useDispatch, useSelector } from "react-redux"
+// next
+import { useRouter } from "next/router"
+import Link from "next/link"
 
 const Header = () => {
+  const router = useRouter()
+
   // redux
   const dispatch = useDispatch()
   const loggedReducer = useSelector(state => state.loggedReducer)
@@ -40,8 +44,9 @@ const Header = () => {
               <li className="action" onClick={()=>{
                 localStorage.removeItem("username")
                 localStorage.removeItem("password")
+                localStorage.removeItem("token")
                 logInOut()
-                document.querySelector("header .logo").click()
+                router.push("/")
               }}>Sign Out</li>
             </ul>
           </>
