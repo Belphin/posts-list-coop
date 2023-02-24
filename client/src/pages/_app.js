@@ -1,8 +1,8 @@
-// redux
-import { Provider } from "react-redux"
-import { store } from "@/store"
 // style
 import '@/style/index.css'
+// redux
+import { Provider } from "react-redux"
+import { store } from "@/store/store"
 // components
 import Header from "@/components/Header"
 

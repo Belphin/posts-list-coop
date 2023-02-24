@@ -3,17 +3,14 @@ import axios from "axios"
 // react
 import { useState, useRef } from "react"
 // redux
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import { login } from "@/store/userSlice"
 // next
 import { useRouter } from "next/router"
 
 const Login = () => {
-	const router = useRouter()
-
-	// redux
 	const dispatch = useDispatch()
-	const loggedReducer = useSelector((state) => state.loggedReducer)
-	const logInOut = () => dispatch({ type: loggedReducer.logged ? "LOG_OUT" : "LOG_IN" })
+	const router = useRouter()
 
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
@@ -21,7 +18,7 @@ const Login = () => {
 	const passwordRef = useRef()
 	const errorRef = useRef()
 
-	const login = async (e) => {
+	const submitForm = async (e) => {
 		e.preventDefault()
 		const data = { username, password }
 		const config = {
@@ -33,19 +30,13 @@ const Login = () => {
 		await axios.post(`http://localhost:8080/api/auth/login/`, data, config)
 			.then(res => res.data)
 			.then(data => {
-				if(!data.message) {
-					localStorage.setItem("username", data.username)
-					localStorage.setItem("token", data.token)
-					logInOut()
-					router.push("/")
-				}
-				else if (data.message == "Incorrect login or password") {
-					usernameRef.current.style.outline = ".125rem solid red"
-					passwordRef.current.style.outline = ".125rem solid red"
-					errorRef.current.style.display = "block"
-				}
+				dispatch(login(data.username))
+				router.push("/")
 			})
-			.catch(e => console.log(e))
+			.catch(e => {
+				if(e.response.data.message == "Incorrect login or password") showError()
+				else console.log(e)
+			})
 	}
 
 	const hideError = () => {
@@ -54,10 +45,16 @@ const Login = () => {
 		errorRef.current.style.display = "none"
 	}
 
+	const showError = () => {
+		usernameRef.current.style.outline = ".125rem solid red"
+		passwordRef.current.style.outline = ".125rem solid red"
+		errorRef.current.style.display = "block"
+	}
+
 	return (
 		<main className="login wrapper">
 			<form
-				onSubmit={login}>
+				onSubmit={submitForm}>
 				<input
 					ref={usernameRef}
 					minLength="4"

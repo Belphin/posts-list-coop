@@ -3,17 +3,14 @@ import axios from "axios"
 // react
 import { useRef, useState } from "react"
 // redux
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import { login } from "@/store/userSlice"
 // next
 import { useRouter } from "next/router"
 
 const SignUp = () => {
-	const router = useRouter()
-
-	// redux
 	const dispatch = useDispatch()
-	const loggedReducer = useSelector((state) => state.loggedReducer)
-	const logInOut = () => dispatch({ type: loggedReducer.logged ? "LOG_OUT" : "LOG_IN" })
+	const router = useRouter()
 
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
@@ -23,7 +20,7 @@ const SignUp = () => {
 	const userExists = useRef()
 	const diffPass = useRef()
 
-	const registration = async (e) => {
+	const submitForm = async (e) => {
 		e.preventDefault()
 		const data = { username, password }
 		const config = {
@@ -36,28 +33,37 @@ const SignUp = () => {
 			await axios.post("http://localhost:8080/api/auth/registration", data, config)
 				.then(res => res.data)
 				.then(data => {
-					if(!data.message){
-						localStorage.setItem("username", username)
-						localStorage.setItem("token", data.token)
-						logInOut()
-						router.push("/")
-					}
-					else if(data.message == "User already registered") {
-						usernameRef.current.style.outline = ".125rem solid red"
-						userExists.current.style.display = "block"
-					}
+					dispatch(login(data.username))
+					router.push("/")
 				})
-				.catch(e => console.log(e.message))
+				.catch(e => {
+					if(e.response.data.message == "User already registered") showUserExistsError()
+					else console.log(e)
+				})
 		}
-		else {
-			passwordRef.current.style.outline = ".125rem solid red"
-			diffPass.current.style.display = "block"
-		}
+		else showDiffPassError()
+	}
+
+	const showUserExistsError = () => {
+		usernameRef.current.style.outline = ".125rem solid red"
+		userExists.current.style.display = "block"
+	}
+
+	const showDiffPassError = () => {
+		passwordRef.current.style.outline = ".125rem solid red"
+		diffPass.current.style.display = "block"
+	}
+
+	const hideErrors = () => {
+		usernameRef.current.style.outline = "none"
+		userExists.current.style.display = "none"
+		passwordRef.current.style.outline = "none"
+		diffPass.current.style.display = "none"
 	}
 
 	return (
 		<main className="login wrapper">
-			<form onSubmit={registration}>
+			<form onSubmit={submitForm}>
 				<input
 					ref={usernameRef}
 					minLength="4"
@@ -65,8 +71,7 @@ const SignUp = () => {
 					value={username}
 					onChange={(e) => {
 						setUsername(e.target.value)
-						usernameRef.current.style.outline = "none"
-						userExists.current.style.display = "none"
+						hideErrors()
 					}}
 					required
 					type="text"
@@ -80,8 +85,7 @@ const SignUp = () => {
 					value={password}
 					onChange={(e) => {
 						setPassword(e.target.value)
-						passwordRef.current.style.outline = "none"
-						diffPass.current.style.display = "none"
+						hideErrors()
 					}}
 					required
 					type="password"
@@ -94,8 +98,7 @@ const SignUp = () => {
 					value={password_2}
 					onChange={(e) => {
 						setPassword_2(e.target.value)
-						passwordRef.current.style.outline = "none"
-						diffPass.current.style.display = "none"
+						hideErrors()
 					}}
 					required
 					type="password"
