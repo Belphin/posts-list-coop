@@ -52,8 +52,8 @@ const Header = () => {
           </>
           :
           <>
-            <Link className="btn outline" href="/log-in">Log in</Link>
-            <Link className="btn" href="/sign-up">Sign Up</Link>
+            <Link className="btn outline" href="/login">Log in</Link>
+            <Link className="btn" href="/signup">Sign Up</Link>
           </>
         }
       </nav>
