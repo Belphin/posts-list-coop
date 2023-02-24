@@ -33,7 +33,10 @@ const SignUp = () => {
 			await axios.post("http://localhost:8080/api/auth/registration", data, config)
 				.then(res => res.data)
 				.then(data => {
-					dispatch(login(data.username))
+					dispatch(login({
+						username: data.username,
+						token: data.token
+					}))
 					router.push("/")
 				})
 				.catch(e => {
