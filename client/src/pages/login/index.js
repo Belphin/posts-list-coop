@@ -21,13 +21,7 @@ const Login = () => {
 	const submitForm = async (e) => {
 		e.preventDefault()
 		const data = { username, password }
-		const config = {
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			}
-		}
-		await axios.post(`http://localhost:8080/api/auth/login/`, data, config)
+		await axios.post(`http://localhost:8080/api/auth/login/`, data)
 			.then(res => res.data)
 			.then(data => {
 				dispatch(login({
@@ -42,16 +36,16 @@ const Login = () => {
 			})
 	}
 
-	const hideError = () => {
-		usernameRef.current.style.outline = "none"
-		passwordRef.current.style.outline = "none"
-		errorRef.current.style.display = "none"
-	}
-
 	const showError = () => {
 		usernameRef.current.style.outline = ".125rem solid red"
 		passwordRef.current.style.outline = ".125rem solid red"
 		errorRef.current.style.display = "block"
+	}
+
+	const hideError = () => {
+		usernameRef.current.style.outline = "none"
+		passwordRef.current.style.outline = "none"
+		errorRef.current.style.display = "none"
 	}
 
 	return (

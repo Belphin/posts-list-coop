@@ -2,21 +2,26 @@
 import axios from "axios"
 // react
 import { useState } from "react"
+// redux
+import { useSelector } from "react-redux"
 // next
 import { useRouter } from "next/router"
 import Link from "next/link"
 
 export const getServerSideProps = async (context) => {
-	const data = await fetch(`http://localhost:8080/api/post/${context.query._id}`)
-		.then(res => res.json())
-		.catch(e => console.log(e.message))
+	const data = await axios.get(`http://localhost:8080/api/post/${context.query._id}`)
+		.then(res => res.data)
+		.catch(e => console.log(e.response.data.message))
 	return {
 		props: data
 	}
 }
 
 const Edit = (data) => {
+	const user = useSelector(state => state.user)
+
 	const router = useRouter()
+
 	const [title, setTitle] = useState(data.title)
 	const [body, setBody] = useState(data.body)
 	const tagsNum = 4
@@ -26,29 +31,33 @@ const Edit = (data) => {
 
 	const submitPost = async (e) => {
 		e.preventDefault()
-		const data = { _id: router.query._id, title, tags, body, author: localStorage.getItem("username") }
+		const data = {
+			_id: router.query._id,
+			title,
+			tags,
+			body,
+			author: user.username
+		}
 		const config = {
 			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				Authorization: "Bearer " + localStorage.getItem("token"),
+				Authorization: "Bearer " + user.token
 			}
 		}
-		await axios.post(`http://localhost:8080/api/post/`, data, config)
-			.then(() => router.push("/"))
-			.catch(e => console.log(e.message))
+		await axios.put(`http://localhost:8080/api/post/`, data, config)
+			.then(res => router.push(`/post/${res.data._id}`))
+			.catch(e => console.log(e.response.data.message))
 	}
 
 	const deletePost = async () => {
 		const config = {
 			headers: {
-				Authorization: "Bearer " + localStorage.getItem("token"),
-				Author: localStorage.getItem("username")
+				Authorization: "Bearer " + user.token,
+				Author: user.username
 			}
 		}
 		await axios.delete(`http://localhost:8080/api/post/${data._id}`, config)
 			.then(() => router.push("/"))
-			.catch(e => console.log(e.message))
+			.catch(e => console.log(e.response.data.message))
 	}
 
 	return (

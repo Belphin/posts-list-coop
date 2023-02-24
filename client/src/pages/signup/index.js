@@ -23,14 +23,8 @@ const SignUp = () => {
 	const submitForm = async (e) => {
 		e.preventDefault()
 		const data = { username, password }
-		const config = {
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			}
-		}
 		if(password === password_2){
-			await axios.post("http://localhost:8080/api/auth/registration", data, config)
+			await axios.post("http://localhost:8080/api/auth/registration", data)
 				.then(res => res.data)
 				.then(data => {
 					dispatch(login({

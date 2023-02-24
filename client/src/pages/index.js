@@ -43,7 +43,7 @@ const Home = () => {
 				if(!maxCount.current) maxCount.current = data.maxCount
 				setPosts([...posts, ...data.posts])
 			})
-			.catch(e => console.log(e.message))
+			.catch(e => console.log(e.response.data.message))
 	}
 
 	useEffect(() => {

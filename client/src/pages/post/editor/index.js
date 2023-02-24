@@ -2,11 +2,16 @@
 import axios from "axios"
 // react
 import { useState } from "react"
+// redux
+import { useSelector } from "react-redux"
 // next
 import { useRouter } from "next/router"
 
 const New = () => {
+	const user = useSelector(state => state.user)
+
 	const router = useRouter()
+
 	const [title, setTitle] = useState("")
 	const [body, setBody] = useState("")
 	const tagsNum = 4
@@ -15,17 +20,20 @@ const New = () => {
 
 	const submitPost = async (e) => {
 		e.preventDefault()
-		const data = { title, tags, body, author: localStorage.getItem("username") }
+		const data = {
+			title,
+			tags,
+			body,
+			author: user.username
+		}
 		const config = {
 			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-				Authorization: "Bearer " + localStorage.getItem("token"),
+				Authorization: "Bearer " + user.token
 			}
 		}
 		await axios.post(`http://localhost:8080/api/post`, data, config)
-			.then(() => router.push("/"))
-			.catch(e => console.log(e.message))
+			.then(res => router.push(`/post/${res.data._id}`))
+			.catch(e => console.log(e.response.data.message))
 	}
 
 	return (

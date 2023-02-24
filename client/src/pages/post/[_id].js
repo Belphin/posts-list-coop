@@ -6,7 +6,7 @@ import Link from "next/link"
 export const getServerSideProps = async (context) => {
 	const data = await axios.get(`http://localhost:8080/api/post/${context.query._id}`)
 		.then(res => res.data)
-		.catch(e => console.log(e.message))
+		.catch(e => console.log(e.response.data.message))
 	return {
 		props: data
 	}
