@@ -7,8 +7,28 @@
   outline: 0.125rem solid cornflowerblue !important;
 }
 
+:root {
+  --wrapper-padding: 1rem;
+  --wrapper-max-width: calc(60rem + var(--wrapper-padding)*2);
+}
+
+.wrapper {
+  max-width: var(--wrapper-max-width);
+  padding-left: var(--wrapper-padding);
+  padding-right: var(--wrapper-padding);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+:root {
+  --main: #000000;
+  --red: #F25E5E;
+  --green: #02C755;
+}
+
 body, input, textarea, button {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: var(--main);
 }
 
 ul {
@@ -17,11 +37,15 @@ ul {
 
 a {
   text-decoration: none;
-  color: #000;
+  color: var(--main);
 }
 
 input, textarea {
   font-size: 1rem;
+}
+
+button {
+  background: none;
 }
 
 .btn {
@@ -32,7 +56,7 @@ input, textarea {
   font-size: 0.8335rem;
   font-weight: 700;
   color: #fff;
-  background: #000;
+  background: var(--main);
   border: none;
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
@@ -41,20 +65,20 @@ input, textarea {
   display: none;
 }
 .btn.red {
-  background: #F25E5E;
+  background: var(--red);
 }
 .btn.green {
-  background: #02C755;
+  background: var(--green);
 }
 .btn.outline {
-  color: #000;
+  color: var(--main);
   background: none;
-  outline: 0.125rem solid #000;
+  outline: 0.125rem solid var(--main);
   outline-offset: -0.125rem;
 }
 .btn.outline.red {
-  color: #F25E5E;
-  outline-color: #F25E5E;
+  color: var(--red);
+  outline-color: var(--red);
 }
 
 form {
@@ -68,19 +92,6 @@ form input, form textarea {
   outline: none;
   border-radius: 0.5rem;
   padding: 1rem;
-}
-
-:root {
-  --wrapper-padding: 1rem;
-  --wrapper-max-width: calc(60rem + var(--wrapper-padding)*2);
-}
-
-.wrapper {
-  max-width: var(--wrapper-max-width);
-  padding-left: var(--wrapper-padding);
-  padding-right: var(--wrapper-padding);
-  margin-left: auto;
-  margin-right: auto;
 }
 
 header {
@@ -101,14 +112,19 @@ header nav #menuBtn {
 }
 header nav .menuBtn {
   cursor: pointer;
+  width: 2rem;
   height: 2rem;
-  aspect-ratio: 1/1;
-  background: url("../../public/images/pfp.svg");
-  background-size: 50%;
-  background-position: center;
-  background-repeat: no-repeat;
-  border: 0.125rem solid #000;
+  display: grid;
+  place-items: center;
+  border: 0.125rem solid var(--main);
   border-radius: 50%;
+}
+header nav .menuBtn svg {
+  width: 50%;
+  height: auto;
+}
+header nav .menuBtn svg path {
+  stroke: var(--main);
 }
 header nav .menu {
   position: relative;
@@ -120,7 +136,7 @@ header nav .menu {
   top: 90%;
   font-size: 0.8335rem;
   background: #fff;
-  border: 0.125rem solid #000;
+  border: 0.125rem solid var(--main);
   border-radius: 0.4rem;
   padding: 0.3rem;
 }
@@ -138,7 +154,7 @@ header nav .menu li.action:hover {
 header nav .menu .divider {
   width: 100%;
   height: 0.125rem;
-  background: #000;
+  background: var(--main);
   margin: 0.25rem 0;
 }
 header nav #menuBtn:checked ~ .menu {
@@ -158,7 +174,7 @@ main.home .posts .post {
   flex-flow: column;
   justify-content: center;
   gap: 0.2rem;
-  border: 0.125rem solid #000;
+  border: 0.125rem solid var(--main);
   border-radius: 1rem;
   padding: 1.5rem;
 }
@@ -209,7 +225,7 @@ main.editor .deleteConfirm .cont {
   overflow: hidden;
   max-width: 25rem;
   background: #fff;
-  border: 0.125rem solid #000;
+  border: 0.125rem solid var(--main);
   border-radius: 0.5rem;
 }
 main.editor .deleteConfirm .cont .text {

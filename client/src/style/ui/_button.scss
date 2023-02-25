@@ -1,3 +1,7 @@
+button{
+  background: none;
+}
+
 .btn{
   cursor: pointer;
   display: flex;
@@ -6,21 +10,21 @@
   font-size: .8335rem;
   font-weight: 700;
   color: #fff;
-  background: #000;
+  background: var(--main);
   border: none;
   border-radius: .5rem;
   padding: .5rem 1rem;
   &.hidden{ display: none; }
-  &.red{ background: $red; }
-  &.green{ background: $green; }
+  &.red{ background: var(--red); }
+  &.green{ background: var(--green); }
   &.outline{
-    color: #000;
+    color: var(--main);
     background: none;
-    outline: .125rem solid #000;
+    outline: $border;
     outline-offset: -0.125rem;
     &.red{
-      color: $red;
-      outline-color: $red;
+      color: var(--red);
+      outline-color: var(--red);
     }
   }
 }

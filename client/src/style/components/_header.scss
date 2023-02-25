@@ -14,14 +14,19 @@ header{
     }
     .menuBtn{
       cursor: pointer;
+      width: 2rem;
       height: 2rem;
-      aspect-ratio: 1/1;
-      background: url("../../public/images/pfp.svg");
-      background-size: 50%;
-      background-position: center;
-      background-repeat: no-repeat;
+      display: grid;
+      place-items: center;
       border: $border;
       border-radius: 50%;
+      svg{
+        width: 50%;
+        height: auto;
+        path{
+          stroke: var(--main);
+        }
+      }
     }
     .menu{
       position: relative;
@@ -50,7 +55,7 @@ header{
       .divider{
         width: 100%;
         height: .125rem;
-        background: #000;
+        background: var(--main);
         margin: .25rem 0;
       }
     }
