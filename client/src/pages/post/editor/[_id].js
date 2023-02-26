@@ -86,6 +86,7 @@ const Edit = (data) => {
 					value={title && title}
 					onChange={(e) => {
 						setTitle(e.target.value)
+						e.target.style.height = "100%"
 						e.target.style.height = e.target.scrollHeight + "px"
 					}}
 				/>

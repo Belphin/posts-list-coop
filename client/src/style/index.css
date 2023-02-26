@@ -21,7 +21,7 @@
 }
 
 :root {
-  --main: #000000;
+  --main: #000;
   --red: #F25E5E;
   --green: #02C755;
 }
@@ -85,6 +85,9 @@ form {
   display: flex;
   flex-flow: column;
   gap: 0.5rem;
+}
+form textarea {
+  resize: none;
 }
 form input, form textarea {
   background: #efefef;
@@ -213,6 +216,19 @@ main.post .post .btn {
   align-self: flex-end;
   margin-top: 1rem;
 }
+main.post .comments {
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+}
+main.post .comments form textarea {
+  max-height: 12rem;
+}
+main.post .comments .cont {
+  display: flex;
+  flex-flow: column;
+  gap: 1rem;
+}
 
 main.editor .deleteConfirm {
   position: absolute;
@@ -250,9 +266,6 @@ main.editor .deleteConfirm .cont nav .cancel {
   background: none;
   font-weight: 500;
   color: #616161;
-}
-main.editor form textarea {
-  resize: none;
 }
 main.editor form .body {
   height: 15rem;
@@ -296,6 +309,10 @@ main.login form {
   max-width: 27rem;
   padding: 2rem;
   margin: 0 auto;
+}
+main.login form h1 {
+  text-align: center;
+  margin-bottom: 0.75rem;
 }
 main.login form .error {
   color: red;

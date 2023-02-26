@@ -2,6 +2,9 @@ form{
   display: flex;
   flex-flow: column;
   gap: .5rem;
+  textarea{
+    resize: none;
+  }
   input, textarea{
     background: #efefef;
     border: none;

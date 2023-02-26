@@ -20,4 +20,19 @@ main.post{
       margin-top: 1rem;
     }
   }
+  .comments{
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
+    form{
+      textarea{
+        max-height: 12rem;
+      }
+    }
+    .cont{
+      display: flex;
+      flex-flow: column;
+      gap: 1rem;
+    }
+  }
 }

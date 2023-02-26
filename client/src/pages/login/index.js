@@ -52,6 +52,7 @@ const Login = () => {
 		<main className="login wrapper">
 			<form
 				onSubmit={submitForm}>
+				<h1>Login</h1>
 				<input
 					ref={usernameRef}
 					minLength="4"
