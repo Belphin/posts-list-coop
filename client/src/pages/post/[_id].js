@@ -1,7 +1,7 @@
 // axios
 import axios from "axios"
 // react
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 // redux
 import { useSelector } from "react-redux"
 // next
@@ -18,7 +18,7 @@ export const getServerSideProps = async (context) => {
 
 const Post = (post) => {
 	const user = useSelector(state => state.user)
-	const [comments, setComments] = useState()
+	const [comments, setComments] = useState([])
 	const [newComment, setNewComment] = useState("")
 
 	useEffect(()=>{
@@ -26,19 +26,27 @@ const Post = (post) => {
 			.then(res => res.data)
 			.then(data => setComments(data))
 			.catch(e => console.log(e.response.data.message))
-		// const data = {
-		// 	author: user.username,
-		// 	content: "123"
-		// }
-		// const config = {
-		// 	headers: {
-		// 		Authorization: "Bearer " + user.token
-		// 	}
-		// }
-		// axios.post(`http://localhost:8080/api/comment/${post.comments}`, data, config)
-		// 	.then(res => console.log(res.data))
-		// 	.catch(e => console.log(e.response.data.message))
 	}, [])
+
+	const addComment = (e) => {
+		e.preventDefault()
+		const data = {
+			author: user.username,
+			content: newComment
+		}
+		const config = {
+			headers: {
+				Authorization: "Bearer " + user.token
+			}
+		}
+		axios.post(`http://localhost:8080/api/comment/${post.comments}`, data, config)
+			.then(res => res.data)
+			.then(data => {
+				setComments([{ content: data.content, author: data.author }, ...comments])
+				setNewComment("")
+			})
+			.catch(e => console.log(e.response.data.message))
+	}
 
 	return (
 		<main className="post wrapper">
@@ -64,14 +72,8 @@ const Post = (post) => {
 
 			<section className="comments">
 				<h3>Comments</h3>
-				<form>
+				<form onSubmit={addComment}>
 					<textarea type="text" placeholder="New comment" value={newComment}
-					onFocus={(e)=>{
-						e.target.parentElement.querySelector("button").style.display = "block"
-					}}
-					onBlur={(e)=>{
-						e.target.parentElement.querySelector("button").style.display = "none"
-					}}
 						onChange={(e)=>{
 							setNewComment(e.target.value)
 							e.target.style.height = "100%"
@@ -81,18 +83,13 @@ const Post = (post) => {
 					<button className="btn">Submit</button>
 				</form>
 				<div className="cont">
-					{ comments?
-							comments.length?
-								comments.map((comment, i) => (
-									<div className="comment" key={i}>
-										<h4>{ comment.author }</h4>
-										<p>{ comment.content }</p>
-									</div>
-								))
-							:
-								<div>No comments yet</div>
-						:
-							<div>Loading...</div>
+					{
+						comments.map((comment, i) => (
+							<div className="comment" key={i}>
+								<h4>{ comment.author }</h4>
+								<p>{ comment.content }</p>
+							</div>
+						))
 					}
 				</div>
 			</section>

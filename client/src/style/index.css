@@ -195,6 +195,9 @@ main.home .posts .observerTrigger {
   text-align: center;
 }
 
+main.post {
+  padding-bottom: var(--wrapper-padding);
+}
 main.post .post {
   display: flex;
   flex-flow: column;
@@ -225,7 +228,6 @@ main.post .comments form textarea {
   max-height: 12rem;
 }
 main.post .comments form button {
-  display: none;
   align-self: flex-start;
 }
 main.post .comments .cont {

@@ -1,4 +1,5 @@
 main.post{
+  padding-bottom: var(--wrapper-padding);
   .post{
     display: flex;
     flex-flow: column;
@@ -29,7 +30,6 @@ main.post{
         max-height: 12rem;
       }
       button{
-        display: none;
         align-self: flex-start;
       }
     }
