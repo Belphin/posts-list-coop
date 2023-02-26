@@ -28,6 +28,10 @@ main.post{
       textarea{
         max-height: 12rem;
       }
+      button{
+        display: none;
+        align-self: flex-start;
+      }
     }
     .cont{
       display: flex;

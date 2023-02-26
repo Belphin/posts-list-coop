@@ -224,6 +224,10 @@ main.post .comments {
 main.post .comments form textarea {
   max-height: 12rem;
 }
+main.post .comments form button {
+  display: none;
+  align-self: flex-start;
+}
 main.post .comments .cont {
   display: flex;
   flex-flow: column;

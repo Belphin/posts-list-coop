@@ -42,6 +42,7 @@ const Post = (post) => {
 
 	return (
 		<main className="post wrapper">
+
 			<section className="post">
 				<h1 className="title">{post.title}</h1>
 				{ post.tags.length != 0 &&
@@ -60,14 +61,24 @@ const Post = (post) => {
 				</div>
 				<Link className="btn" href={`/post/editor/${post._id}`}>Edit</Link>
 			</section>
+
 			<section className="comments">
 				<h3>Comments</h3>
 				<form>
-					<textarea type="text" placeholder="New comment" value={newComment} onChange={(e)=>{
-						setNewComment(e.target.value)
-						e.target.style.height = "100%"
-						e.target.style.height = e.target.scrollHeight + "px"
-					}} />
+					<textarea type="text" placeholder="New comment" value={newComment}
+					onFocus={(e)=>{
+						e.target.parentElement.querySelector("button").style.display = "block"
+					}}
+					onBlur={(e)=>{
+						e.target.parentElement.querySelector("button").style.display = "none"
+					}}
+						onChange={(e)=>{
+							setNewComment(e.target.value)
+							e.target.style.height = "100%"
+							e.target.style.height = e.target.scrollHeight + "px"
+						}}
+					/>
+					<button className="btn">Submit</button>
 				</form>
 				<div className="cont">
 					{ comments?
@@ -85,6 +96,7 @@ const Post = (post) => {
 					}
 				</div>
 			</section>
+
 		</main>
 	)
 }
