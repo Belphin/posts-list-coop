@@ -28,7 +28,7 @@ const Home = () => {
 	}, [])
 
 	useEffect(() => {
-		if (observerTriggerSeen) addPosts()
+		if(observerTriggerSeen) addPosts()
 	}, [observerTriggerSeen])
 
 	const addPosts = () => {
@@ -49,7 +49,7 @@ const Home = () => {
 	useEffect(() => {
 		// load more posts if loaded posts do not overflow the page
 		const headerHeight = document.querySelector("header").clientHeight
-		if(maxCount.current && headerHeight + postsRef.current.clientHeight - 100 < window.innerHeight) addPosts()
+		if(maxCount.current && observerTrigger.current && headerHeight + postsRef.current.clientHeight - 100 < window.innerHeight) addPosts()
 	}, [posts])
 
 	return (
@@ -71,7 +71,8 @@ const Home = () => {
 							</Link>
 					  ))
 				}
-				{ (page.current + 1) * postsPerPage - postsPerPage <= maxCount.current &&
+				{ 
+					(page.current + 1) * postsPerPage - postsPerPage <= maxCount.current &&
 						<div className="observerTrigger" ref={observerTrigger}>Loading...</div>
 				}
 			</div>
